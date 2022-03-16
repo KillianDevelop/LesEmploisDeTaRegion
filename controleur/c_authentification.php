@@ -24,7 +24,6 @@ if (isset($_POST["login"]) && isset($_POST["password"])){
         $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
         $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
-        echo "test";
 
     }else{
         $msgErreur = "Erreur, tous les champs du formulaire doivent être complétés";
