@@ -24,8 +24,6 @@ if (isset($_POST["login"]) && isset($_POST["password"])){
         $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
         $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
-        echo "Ceci est un test pour savoir si le push de git marche bien";
-
     }else{
         $msgErreur = "Erreur, tous les champs du formulaire doivent être complétés";
     }
