@@ -12,7 +12,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <form>
+        <form method="POST">
             <h1> Connexion à votre compte entreprise </h1>
             <hr width="100%" size="5" align="center" NOSHADE>    
             <p class="txtAuth"> Vous êtes déjà client ? </p>

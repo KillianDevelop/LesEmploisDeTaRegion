@@ -14,7 +14,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     </head>
     <body>
-        <form>
+        <form method="POST">
             <h1> Connexion à votre compte utilisateur </h1>
             <hr width="100%" size="5" align="center" NOSHADE>    
             <p class="txtAuth"> Vous êtes déjà utilisateur ? </p>
