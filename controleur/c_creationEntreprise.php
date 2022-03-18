@@ -12,6 +12,7 @@ if ( $_SERVER["SCRIPT_FILENAME"] == __FILE__ ){
     $racine="..";
 }
 
+echo "test";
 
 
 // Appel du script de vue qui permet de gérer l'affichage des données
