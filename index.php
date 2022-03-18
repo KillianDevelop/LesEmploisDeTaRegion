@@ -11,11 +11,15 @@
 include "getRacine.php";
 include "$racine/controleur/c_principal.php";
 
-// Vérifie si l'action n'est pas null
-if (isset($_GET["action"])){
-    $action = $_GET["action"];
+// Activation du tableau super-global $_SESSION
+if (!isset($_SESSION)) {
+    session_start();
 }
-else{
+
+// Vérifie si l'action n'est pas null
+if (isset($_GET["action"])) {
+    $action = $_GET["action"];
+} else {
     $action = "defaut";
 }
 
