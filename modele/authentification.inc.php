@@ -16,79 +16,70 @@ include_once "bd.utilisateur.inc.php";
 
 function login(string $melU, string $mdpU)
 {
+    if (!isset($_SESSION)) {
+        session_start();
+    }
 
-    if (($melU !== "") && ($mdpU !== "")) {
+    // Déclaration d'un booléen faisant état de la nécessité
+    // d'un message d'erreur ou non
+    $valide = TRUE;
 
-        // Déclaration d'un booléen faisant état de la nécessité
-        // d'un message d'erreur ou non
-        $valide = TRUE;
+    // Déclaration d'un variable stockant les données du visiteur
+    // ayant saisie ses informations pour s'authentifier
+    $utilisateur = getUtilisateurByMail($melU);
 
-        if (isset($_POST["login"])) {
-            // Déclaration d'un variable stockant les données du visiteur
-            // ayant saisie ses informations pour s'authentifier
-            $utilisateur = getUtilisateurByMail($_POST["login"]);
+    // Vérification de l'existance d'un visiteur correspondant
+    // aux informations données
+    if ((isset($utilisateur["idUtilisateur"])) && !empty($utilisateur["idUtilisateur"])) {
 
-            // Vérification de l'existance d'un visiteur correspondant
-            // aux informations données
-            if ((isset($utilisateur["idUtilisateur"])) && !empty($utilisateur["idUtilisateur"])) {
+        // Affectation à la variable de la valeur du mot de passe de l'utilisateur
+        $mdp = $utilisateur["motDePasseUtilisateur"];
 
-                // Affectation à la variable de la valeur du mot de passe de l'utilisateur
-                $mdp = $utilisateur["motDePasseUtilisateur"];
+        // Vérification de l'existance d'un mot de passe dans la base de données
+        if (trim($mdpU) === trim($mdp)) {
 
-                // Vérification de l'existance d'un mot de passe dans la base de données
-                if (trim($mdpU) === trim($mdp)) {
+            // Déclaration d'une variable contenant l'id de l'utilisateur
+            $_SESSION["idUtil"] =  $utilisateur["idUtilisateur"];
 
-                    // Déclaration d'une variable contenant l'id de l'utilisateur
-                    $_SESSION["idUtil"] =  $utilisateur["idUtilisateur"];
+            // Déclaration d'élément dans le tableau $_SESSION contenant les données
+            // de l'utilisateur s'étant connecté
+            $_SESSION["nomUtil"] = $utilisateur["nomUtilisateur"];
+            $_SESSION["prenomUtil"] = $utilisateur["prenomUtilisateur"];
+            $_SESSION["mdpUtil"] = $mdp;
+            $_SESSION["mailU"] = $utilisateur["emailUtilisateur"];
 
-                    // Déclaration d'élément dans le tableau $_SESSION contenant les données
-                    // de l'utilisateur s'étant connecté
-                    $_SESSION["nomUtil"] = $utilisateur["nomUtilisateur"];
-                    $_SESSION["prenomUtil"] = $utilisateur["prenomUtilisateur"];
-                    $_SESSION["mdpUtil"] = $mdp;
-                    $_SESSION["mailU"] = $utilisateur["emailUtilisateur"];
-
-                    // Évolution du besoin d'un message erreur
-                    $valide = FALSE;
-                }
-            }
-        }else{
-            $_SESSION["idUtil"] =  "";
-            $_SESSION["nomUtil"] = "";
-            $_SESSION["prenomUtil"] = "";
-            $_SESSION["mdpUtil"] = "";
-            $_SESSION["mailU"] = "";
+            // Évolution du besoin d'un message erreur
+            $valide = FALSE;
         }
+    } else {
+        $_SESSION["idUtil"] =  "";
+        $_SESSION["nomUtil"] = "";
+        $_SESSION["prenomUtil"] = "";
+        $_SESSION["mdpUtil"] = "";
+        $_SESSION["mailU"] = "";
+    }
 
-        // Affectation si besoin d'un message d'erreur
-        if ($valide) {
-            // Déclaration d'un message d'erreur pour avertir l'utilisateur
-            $_SESSION["messageErreur"] = "L'email et/ou le mot de passe sont"
-                . " incorrects.";
-        }
+    // Affectation si besoin d'un message d'erreur
+    if ($valide) {
+        // Déclaration d'un message d'erreur pour avertir l'utilisateur
+        $_SESSION["messageErreur"] = "L'email et/ou le mot de passe sont"
+            . " incorrects.";
     }
 }
 
 function estConnecte()
 {
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+
     $valide = false;
-    // ! Faire la méthode getIdEtMdpParNomEtPrenom()
-    $idEtMdpUtilisateur = getIdEtMdpParNomEtPrenom($_SESSION["nomUtil"], $_SESSION["prenomUtil"]);
 
-    if (isset($_SESSION["mailU"]) && isset($_SESSION["mdpUtil"])) {
+    if (isset($_SESSION["mailU"])) {
+        $utilisateur = getUtilisateurByMail($_SESSION["mailU"]);
 
-        // Vérification de la corélation entre les données saisies par l'utilisateur
-        // et les données de la base de données
-        if (($idEtMdpUtilisateur["VIS_MATRICULE"] === $_SESSION["matriculeVis"])
-            && ($idEtMdpUtilisateur["VIS_MDP"] === $_SESSION["mdpVis"])
-        ) {
-            if (
-                $idEtMdpUtilisateur["idUtil"] === $_SESSION["idUtil"]
-                && $idEtMdpUtilisateur["mdpUtil"] === $_SESSION["mdpUtil"]
-            ) {
-
-                $valide = true;
-            }
+        if ($utilisateur["emailUtilisateur"] === $_SESSION["mailU"] && $utilisateur["motDePasseUtilisateur"] === $_SESSION["mdpUtil"]) {
+            $valide = true;
         }
     }
     return $valide;
