@@ -39,6 +39,12 @@ form p.txtAuth {
     
 }
 
+form p.txtErreur {
+    font-size: 12px;
+    margin-bottom: 20px;
+    color: red;
+}
+
 form p.txtRedigCreeCompte{
     font-size: 12px;
     color: #878787;

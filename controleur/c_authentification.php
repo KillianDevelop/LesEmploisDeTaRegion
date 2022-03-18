@@ -49,6 +49,7 @@ login($login, $password);
 if (estConnecte()){
     include_once "$racine/controleur/c_accueil.php";
 }else{
+$msgErreur = "Erreur, identifiants incorrects, réessayez";
 // Appel du script de vue qui permet de gérer l'affichage des données
 $titre = "Authentification Utilisateur";
 include "$racine/vue/v_authentificationUtilisateur.php";
