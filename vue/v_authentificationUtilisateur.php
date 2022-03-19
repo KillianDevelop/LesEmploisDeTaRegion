@@ -23,10 +23,11 @@ and open the template in the editor.
         <p class="txtErreur">
             <?php
             // Permet de gérer l'apparition des messages d'erreurs
-            if (isset($_POST["login"]) && isset($_POST["password"]))
+            if (isset($_POST["login"]) && isset($_POST["password"])){
                 if ($msgErreur !== "") {
                     echo $msgErreur;
                 }
+            }
             ?></p>
         <div class="inputs">
             <input type="email" placeholder="Email *" name="login" icons="" required="required">

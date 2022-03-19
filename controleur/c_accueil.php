@@ -1,6 +1,4 @@
 <?php
 
-echo "Hello world !"
-
-
+include "$racine/vue/v_accueil.php"
 ?>
