@@ -94,50 +94,44 @@ function getIdEtMdpParNomEtPrenom(string $nomU, string $prenomU)
     return $resultat;
 }
 
-
-/*
-function getIdEtMdpParNomEtPrenom(string $nomU, string $prenomU)
+function newUtilisateur(string $nomUtilisateur, string $prenomUtilisateur, string $emailUtilisateur, 
+                        string $motDePasseUtilisateur)
 {
-
-    // Déclaration d'une variable tableau vide de résultat
     $resultat = array();
-
     try {
-
-        // Déclaration d'un variable contenant les informations de connexion
-        // à la base de données via PDO
         $connexion = connexionPDO();
 
-        /* 
-        * Déclaration de la requête SQL à exécuter
-        * La requête retournera l'id , le nom, le prénom, mail,
-        * et la date de création du compte de l'utilisateur authentifié
-        
-
-        $sql = "select u.idUtilisateur, u.emailUtilisateur"
-            . " from utilisateur u"
-            . " where u.nomUtilisateur = :nomU and u.prenomUtilisateur = :prenomU";
-
-        // Préparation de la requête SQL
+        $sql = "insert into utilisateur (nomUtilisateur, prenomUtilisateur, emailUtilisateur, motDePasseUtilisateur)
+                VALUES (:nomUtilisateur, :prenomUtilisateur, :emailUtilisateur, :motDePasseUtilisateur)";
         $requete = $connexion->prepare($sql);
-
-        // Exécution de la requête SQL en remplaçant les valeurs des variables
-        // SQL par celles des paramètres
-        $requete->bindValue(':nomU', $nomU, PDO::PARAM_STR);
-        $requete->bindValue(':prenomU', $prenomU, PDO::PARAM_STR);
-        $requete->execute();
-        // Affectation d'un tableau associatif contenant les informations de l'utilisateur
-        // ("nom_du_champ" => "valeur_du_champ")
-        $resultat = $requete->fetch(PDO::FETCH_ASSOC);
+        $requete->execute(array(
+            ':nomUtilisateur' => $nomUtilisateur,
+            ':prenomUtilisateur' => $prenomUtilisateur,
+            ':emailUtilisateur' => $emailUtilisateur,
+            ':motDePasseUtilisateur' => $motDePasseUtilisateur
+        ));
     } catch (PDOException $e) {
-
-        // Affichage d'un message contextuel d'erreur
-        print "Erreur !: " . $e->getMessage();
-
-        // Arrêt du code
+        print 'Erreur' . $e->getMessage();
         die();
     }
-
     return $resultat;
 }
-*/
+
+function verif_existe(string $emailUtilisateur){
+    try{
+        $connexion = connexionPDO();
+        $sql = "SELECT count(U.idUtilisateur) as 'existe'"
+                . " FROM utilisateur U"
+                . " WHERE U.emailUtilisateur = :emailUtilisateur";
+        $requete = $connexion->prepare($sql);
+        $requete->execute(array(':emailUtilisateur' => $emailUtilisateur));
+
+        $resultat = $requete->fetch(PDO::FETCH_ASSOC);
+
+        return ($resultat['existe'] !=='0');
+
+    }catch(PDOException $e){
+        print 'Erreur, ' . $e->getMessage();
+        die();
+    }
+}

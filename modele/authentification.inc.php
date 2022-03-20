@@ -5,7 +5,7 @@
  * Permet de se connecter à la base de données phpmyadmin
  * Auteur Killian Nadal
  * Création 14/03/2022
- * Derniere MAJ 15/03/2022
+ * Derniere MAJ 19/03/2022
  */
 
 include_once "pdo.inc.php";
@@ -48,8 +48,11 @@ function login(string $melU, string $mdpU)
             $_SESSION["mdpUtil"] = $mdp;
             $_SESSION["mailU"] = $utilisateur["emailUtilisateur"];
 
-            // Évolution du besoin d'un message erreur
-            $valide = FALSE;
+
+            if (password_verify($mdpU, $mdp)) {
+                // Évolution du besoin d'un message erreur
+                $valide = FALSE;
+            }
         }
     } else {
         $_SESSION["idUtil"] =  "";
@@ -67,6 +70,7 @@ function login(string $melU, string $mdpU)
     }
 }
 
+// Permet d'authentifier un utilisateur voulant se connecter
 function estConnecte()
 {
     if (!isset($_SESSION)) {
@@ -74,11 +78,13 @@ function estConnecte()
     }
 
     $valide = false;
-
-    if (isset($_SESSION["mailU"])) {
+    // Vérifie que $_SESSION["mailU"] n'est pas null
+    if (isset($_POST["login"]) && isset($_POST["password"])) {
         // Permet de générer l'authentification dès que l'utilisateur aura remplis le formulaire
-        if (isset($_POST["login"]) && isset($_POST["password"])) {
+        if (isset($_SESSION["mailU"])) {
+            // Récupère les informations de l'utilisateur à partir du mail rentré en paramètre
             $utilisateur = getUtilisateurByMail($_SESSION["mailU"]);
+            // Vérifie si le mail et le mdp corresponde aux informations sur la bdd
             if (
                 $utilisateur["emailUtilisateur"] === $_SESSION["mailU"]
                 && $utilisateur["motDePasseUtilisateur"] === $_SESSION["mdpUtil"]

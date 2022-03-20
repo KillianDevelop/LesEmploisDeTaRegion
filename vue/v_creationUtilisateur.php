@@ -16,22 +16,44 @@ and open the template in the editor.
             <h1> Création de votre compte utilisateur </h1>
             <hr width="100%" size="5" align="center" NOSHADE>    
             <p class="txtAuth"> Créez votre compte utilisateur </p>
+            <p class="txtErreur">
+            <?php
+            // Permet de gérer l'apparition des messages d'erreurs
+            if (isset($_POST["nom"]) && isset($_POST["prenom"]) &&
+                isset($_POST["email"]) && isset($_POST["mdp"])){
+                if ($msgErreur !== "") {
+                    echo $msgErreur;
+                }
+            }
+            ?></p>
+
+            <p class="txtValid">
+            <?php
+            // Permet de gérer l'apparition des messages d'erreurs
+            if (isset($_POST["nom"]) && isset($_POST["prenom"]) &&
+                isset($_POST["email"]) && isset($_POST["mdp"])){
+                if ($msg !== "") {
+                    echo $msg;
+                }
+            }
+            ?></p>
+
             <div class="div-principal">
                 <div class="div-sec">
-                    <input class="input" type="text" placeholder="Nom *" required="required"></input>
+                    <input class="input" name="nom" type="text" placeholder="Nom *" required="required"></input>
                 </div>
                 <div class="div-sec">
-                    <input class="input" type="text" placeholder="Prénom *" required="required"></input>
+                    <input class="input" name="prenom" type="text" placeholder="Prénom *" required="required"></input>
                 </div>
             </div>
             <div class="input-email">
-                    <input type="email" placeholder="Email *"required="required">
+                    <input type="email" name="email" placeholder="Email *"required="required">
             <div class="div-principal">
                 <div class="div-sec">
-                    <input class="input" type="password" placeholder="Mot de passe *" required="required"></input>
+                    <input class="input" name="mdp" type="password" placeholder="Mot de passe *" required="required"></input>
                 </div>
                 <div class="div-sec">
-                    <input class="input" type="password" placeholder="Confirmez votre mot de passe *" required="required"></input>
+                    <input class="input" name="mdp2" type="password" placeholder="Confirmez votre mot de passe *" required="required"></input>
                 </div>
             </div>
                     <p class='txtAuth'><i>* Champ requis </i></p>

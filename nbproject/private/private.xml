@@ -5,6 +5,7 @@
         <group>
             <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/controleur/c_creationUtilisateur.php</file>
             <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/controleur/c_creationEntreprise.php</file>
+            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/modele/authentification.inc.php</file>
             <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/index.php</file>
             <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/controleur/c_authentificationEntreprise.php</file>
             <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/vue/v_creationEntreprise.php</file>

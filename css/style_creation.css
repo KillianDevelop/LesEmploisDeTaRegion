@@ -66,6 +66,12 @@ form p.txtErreur {
     color: red;
 }
 
+form p.txtValid {
+    font-size: 12px;
+    margin-bottom: 20px;
+    color: #33FF60;
+}
+
 form p.txtRedigCreeCompte{
     font-size: 12px;
     color: #878787;
