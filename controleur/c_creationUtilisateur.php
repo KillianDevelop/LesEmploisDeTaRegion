@@ -28,47 +28,56 @@ if (
         $_POST["nom"] !== "" && $_POST["prenom"] !== "" && $_POST["email"] !== ""
         && $_POST["mdp"] !== "" && $_POST["mdp2"] !== ""
     ) {
+        // Vérifie si une variable d'un type spécifique existe
+        if (
+            filter_has_var(INPUT_POST, 'nom') && filter_has_var(INPUT_POST, 'prenom') &&
+            filter_has_var(INPUT_POST, 'email') && filter_has_var(INPUT_POST, 'mdp') &&
+            filter_has_var(INPUT_POST, 'mdp2')
+        ) {
 
-        // Affectation des valeurs des POST à des variables local
-        $nom = $_POST["nom"];
-        $prenom = $_POST["prenom"];
-        $email = $_POST["email"];
-        $mdp = $_POST["mdp"];
-        $mdp2 = $_POST["mdp2"];
+            // Affectation des valeurs des POST à des variables local
+            $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_STRING);
+            $prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_STRING);
+            $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+            $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
+            $mdp2 = filter_input(INPUT_POST, 'mdp2', FILTER_SANITIZE_STRING);
 
-        // Vérifie que le nom/prénom rentré par l'utilisateur respecte le format standard.
-        if (preg_match("/^[A-Z][A6Za-z\é\è\ê\-]+$/", $nom) && preg_match("/^[A-Z][A6Za-z\é\è\ê\-]+$/", $prenom)) {
-            // Vérifie que le mail rentré par l'utilisateur respecte le format standard.
-            if (preg_match(" /^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/ ", $email)) {
-                // Vérifie que les deux mots de passe possèdent au moins 8 caractères, des majuscules, minuscules et des chiffres.
-                if (
-                    preg_match("/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/", $mdp) &&
-                    preg_match("/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/", $mdp2)
-                ) {
-                    // Vérifie que les deux mots de passe rentrés par l'utilisateur sont bien identiques.
-                        // Mets les noms/prenoms en minuscules.
-                        $verifNom = strtolower($nom);
-                        $verifPrenom = strtolower($prenom);
+            // Vérifie que le nom/prénom rentré par l'utilisateur respecte le format standard.
+            if (preg_match("/^[A-Z][A6Za-z\é\è\ê\-]+$/", $nom) && preg_match("/^[A-Z][A6Za-z\é\è\ê\-]+$/", $prenom)) {
+                // Vérifie que le mail rentré par l'utilisateur respecte le format standard.
+                if (preg_match(" /^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/ ", $email)) {
+                    // Vérifie que les deux mots de passe possèdent au moins 8 caractères, des majuscules, minuscules et des chiffres.
+                    if (
+                        preg_match("/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/", $mdp) &&
+                        preg_match("/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/", $mdp2)
+                    ) {
 
-                        // Met en majuscule la première lettre du nom/prénom.
-                        $nom = ucwords($verifNom);
-                        $prenom = ucwords($verifPrenom);
-                        $mdp_hache = password_hash($mdp, PASSWORD_BCRYPT, ['cost' => 10]);
                         // ! Verifier si l'email est déjà utilisé
-                        // ! Faire le salage + hashage du mdp 
+                        //?var_dump(verif_existe($email));
+                        //?if (verif_existe($email) === false ){
+                        // Hashage du mot de passe de l'utilisateur 
+                        $mdp_hache = password_hash($mdp, PASSWORD_BCRYPT, ['cost' => 10]);
+
                         // Création du nouvel utilisateur.
                         newUtilisateur($nom, $prenom, $email, $mdp_hache);
 
                         $msg = "Votre compte utilisateur vient d'être créé avec succès.";
-                    
+
+                        //?}else{
+                          //? $msgErreur = "Erreur, le mail utilisé appartient déjà à un compte Utilisateur";
+                        //?}
+
+                    } else {
+                        $msgErreur = "Erreur, votre mot de passe doit contenir au moins 8 caractères, des minuscules, majscules et des chiffres";
+                    }
                 } else {
-                    $msgErreur = "Erreur, votre mot de passe doit contenir au moins 8 caractères, des minuscules, majscules et des chiffres";
+                    $msgErreur = "Erreur, le mail ne respecte pas le format d'un mail standard.";
                 }
             } else {
-                $msgErreur = "Erreur, le mail ne respecte pas le format d'un mail standard.";
+                $msgErreur = "Erreur, le nom et/ou le prénom ne respecte pas le format d'un nom/prénom standard.";
             }
         } else {
-            $msgErreur = "Erreur, le nom et/ou le prénom ne respecte pas le format d'un nom/prénom standard.";
+            $msgErreur = "Erreur, tous les champs du formulaire doivent être complétés.";
         }
     } else {
         $msgErreur = "Erreur, tous les champs du formulaire doivent être complétés.";
