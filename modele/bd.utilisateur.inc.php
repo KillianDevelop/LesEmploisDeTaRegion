@@ -118,6 +118,7 @@ function newUtilisateur(string $nomUtilisateur, string $prenomUtilisateur, strin
 }
 
 function verif_existe(string $emailUtilisateur){
+    $valide = false;
     try{
         $connexion = connexionPDO();
         $sql = "SELECT count(U.idUtilisateur) as 'existe'"
@@ -128,10 +129,13 @@ function verif_existe(string $emailUtilisateur){
 
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
 
-        return ($resultat['existe'] !=='0');
+        if ($resultat === 1){
+            $valide = true;
+        }
 
     }catch(PDOException $e){
         print 'Erreur, ' . $e->getMessage();
         die();
     }
+    return $valide;
 }
