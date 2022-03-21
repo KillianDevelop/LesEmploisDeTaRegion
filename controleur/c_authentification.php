@@ -24,13 +24,12 @@ if (isset($_POST["login"]) && isset($_POST["password"])){
     // Vérifie que les valeurs du formulaire ne sont pas vide
     if($_POST["login"] !== "" && $_POST["password"] !== ""){
         
+        // Filtrage des POST du formulaire 
         if (filter_has_var(INPUT_POST, 'login') && filter_has_var(INPUT_POST, 'password')){
 
-            // Filtrage des données du formulaire
+            // Filtrage des données du formulaire + gestion des failles XSS
             $login = filter_input(INPUT_POST, 'login', FILTER_VALIDATE_EMAIL);
-
-            // ! Voir htmlspecialchars pour remplacer sanitaze string
-            $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+            $password = htmlspecialchars($_POST['password'], ENT_NOQUOTES);
 
         }else{
             $msgErreur = "Erreur, l'adresse mail n'est pas conforme";

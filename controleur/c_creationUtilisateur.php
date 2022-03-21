@@ -35,15 +35,17 @@ if (
             filter_has_var(INPUT_POST, 'mdp2')
         ) {
 
-            // Affectation des valeurs des POST à des variables local
-            $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_STRING);
-            $prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_STRING);
+            // Filtre les données du mail rentré dans le formulaire 
             $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-            $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
-            $mdp2 = filter_input(INPUT_POST, 'mdp2', FILTER_SANITIZE_STRING);
+
+            // Affectation des valeurs des POST à des variables local + traitement faille XSS
+            $nom = htmlspecialchars($_POST['nom'], ENT_NOQUOTES);
+            $prenom = htmlspecialchars($_POST['prenom'], ENT_NOQUOTES);
+            $mdp = htmlspecialchars($_POST['mdp'], ENT_NOQUOTES);
+            $mdp2 = htmlspecialchars($_POST['mdp2'], ENT_NOQUOTES);
 
             // Vérifie que le nom/prénom rentré par l'utilisateur respecte le format standard.
-            if (preg_match("/^[A-Z][A6Za-z\é\è\ê\-]+$/", $nom) && preg_match("/^[A-Z][A6Za-z\é\è\ê\-]+$/", $prenom)) {
+            if (preg_match("/^[A-Za-z][A6Za-z\é\è\ê\-]+$/", $nom) && preg_match("/^[A-Za-z][A6Za-z\é\è\ê\-]+$/", $prenom)) {
                 // Vérifie que le mail rentré par l'utilisateur respecte le format standard.
                 if (preg_match(" /^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/ ", $email)) {
                     // Vérifie que les deux mots de passe possèdent au moins 8 caractères, des majuscules, minuscules et des chiffres.
@@ -51,6 +53,12 @@ if (
                         preg_match("/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/", $mdp) &&
                         preg_match("/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/", $mdp2)
                     ) {
+                        // Met le nom/prenom en minuscule permettra d'ensuite uniformiser les nom/prenom dans la bdd
+                        $verif_nom = strtolower($nom);
+                        $verif_prenom = strtolower($prenom);
+                        // Met la première lettre du string en majuscule 
+                        $nom = ucwords($verif_nom);
+                        $prenom = ucwords($verif_prenom);
 
                         // ! Verifier si l'email est déjà utilisé
                         //?var_dump(verif_existe($email));
@@ -64,7 +72,7 @@ if (
                         $msg = "Votre compte utilisateur vient d'être créé avec succès.";
 
                         //?}else{
-                          //? $msgErreur = "Erreur, le mail utilisé appartient déjà à un compte Utilisateur";
+                          //? $msgErreur = "Erreur, ce mail est déjà associés à un compte Utilisateur";
                         //?}
 
                     } else {
