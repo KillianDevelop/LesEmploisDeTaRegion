@@ -17,6 +17,7 @@ function controleurPrincipal(string $action){
     $lesActions["authentificationEntre"] = "c_authentificationEntreprise.php";
     $lesActions["creationEntre"] = "c_creationEntreprise.php";  
     $lesActions["creationUtil"] = "c_creationUtilisateur.php";  
+    $lesActions["deconnexion"] = "c_deconnexion.php";
     
     if (array_key_exists( $action , $lesActions )){
         return $lesActions[$action];
