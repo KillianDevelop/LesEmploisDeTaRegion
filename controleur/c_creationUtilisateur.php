@@ -17,6 +17,7 @@ include_once "$racine/modele/bd.utilisateur.inc.php";
 // Initialisation de variables utile pour la gestion des erreurs/validation
 $msgErreur = "";
 $msg = "";
+$valideConnexion = false;
 
 // Vérifie que tous les champs du formulaire ne sont pas null
 if (
@@ -70,9 +71,9 @@ if (
                         newUtilisateur($nom, $prenom, $email, $mdp_hache);
 
                         $msg = "Votre compte utilisateur vient d'être créé avec succès.";
-
+                        $valideConnexion = true;
                         //?}else{
-                          //? $msgErreur = "Erreur, ce mail est déjà associés à un compte Utilisateur";
+                        //? $msgErreur = "Erreur, ce mail est déjà associés à un compte Utilisateur";
                         //?}
 
                     } else {
@@ -94,7 +95,10 @@ if (
     $msgErreur = "Erreur, tous les champs du formulaire doivent être complétés.";
 }
 
-
-// Appel du script de vue qui permet de gérer l'affichage des données
-$titre = "Création Utilisateur";
-include "$racine/vue/v_creationUtilisateur.php";
+if ($valideConnexion === true) {
+    include "$racine/controleur/c_accueil.php";
+} else {
+    // Appel du script de vue qui permet de gérer l'affichage des données
+    $titre = "Création Utilisateur";
+    include "$racine/vue/v_creationUtilisateur.php";
+}
