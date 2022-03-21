@@ -36,7 +36,7 @@ function login(string $melU, string $mdpU)
         $mdp = $utilisateur["motDePasseUtilisateur"];
 
         // Vérification de l'existance d'un mot de passe dans la base de données
-        if (trim($mdpU) === trim($mdp)) {
+        if (password_verify($mdpU, $mdp)) {
 
             // Déclaration d'une variable contenant l'id de l'utilisateur
             $_SESSION["idUtil"] =  $utilisateur["idUtilisateur"];
@@ -48,11 +48,8 @@ function login(string $melU, string $mdpU)
             $_SESSION["mdpUtil"] = $mdp;
             $_SESSION["mailU"] = $utilisateur["emailUtilisateur"];
 
-
-            if (password_verify($mdpU, $mdp)) {
-                // Évolution du besoin d'un message erreur
-                $valide = FALSE;
-            }
+            // Évolution du besoin d'un message erreur
+            $valide = FALSE;
         }
     } else {
         $_SESSION["idUtil"] =  "";
