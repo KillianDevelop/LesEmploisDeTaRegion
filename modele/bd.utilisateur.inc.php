@@ -139,3 +139,23 @@ function verif_existe(string $emailUtilisateur){
     }
     return $valide;
 }
+
+function newFormulaireContact(string $sujetContact, string $messageContact)
+{
+    $resultat = array();
+    try {
+        $connexion = connexionPDO();
+
+        $sql = "insert into contact (sujetContact, messageContact)
+                VALUES (:sujetContact, :messageContact)";
+        $requete = $connexion->prepare($sql);
+        $requete->execute(array(
+            ':sujetContact' => $sujetContact,
+            ':messageContact' => $messageContact
+        ));
+    } catch (PDOException $e) {
+        print 'Erreur' . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}

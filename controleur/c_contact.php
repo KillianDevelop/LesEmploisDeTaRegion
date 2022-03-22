@@ -12,5 +12,21 @@ if ( $_SERVER["SCRIPT_FILENAME"] == __FILE__ ){
     $racine="..";
 }
 
+include "$racine/modele/bd.utilisateur.inc.php";
 
+$msgErreur = "";
+
+if (isset($_POST["titre"]) && isset($_POST["message"])){
+    if (!empty($_POST["titre"]) && !empty($_POST["message"])){
+
+        newFormulaireContact($_POST["titre"], $_POST["message"]);
+
+    }else{
+        $msgErreur = "Erreur, tous les champs du formulaire doivent être complétés.";
+    }
+}else{
+    $msgErreur = "Erreur, tous les champs du formulaire doivent être complétés.";
+}
+
+include "$racine/vue/header.php";
 include_once "$racine/vue/v_contact.php";

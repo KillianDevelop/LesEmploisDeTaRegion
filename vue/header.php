@@ -28,6 +28,3 @@
             </div>
         </nav>
     </header>
-</body>
-
-</HTML>
