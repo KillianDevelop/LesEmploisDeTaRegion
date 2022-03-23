@@ -19,11 +19,11 @@
                 </div>
 
                 <div class="menu-right">
-                    <a href=# class="menu-link"><i class="fa-solid fa-house"></i> Accueil </a>
+                    <a href="?action=accueil" class="menu-link"><i class="fa-solid fa-house"></i> Accueil </a>
                     <a href=# class="menu-link"><i class="fa-solid fa-circle-user"></i> Mon Profil </a>
+                    <a href="?action=contact" class="menu-link"><i class="fa-solid fa-envelope"></i> Contact </a>
                     <a href=# class="menu-link"><i class="fa-solid fa-circle-question"></i> A propos </a>
-                    <a href=./?action=contact class="menu-link"><i class="fa-solid fa-envelope"></i> Contact </a>
-                    <a href="./?action=deconnexion" class="menu-link"><i class="fa-solid fa-arrow-right-from-bracket"></i> Déconnexion</a>
+                    <a href="?action=deconnexion" class="menu-link"><i class="fa-solid fa-arrow-right-from-bracket"></i> Déconnexion</a>
                 </div>
             </div>
         </nav>
