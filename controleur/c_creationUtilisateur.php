@@ -36,9 +36,11 @@ if (
             filter_has_var(INPUT_POST, 'mdp2')
         ) {
 
+            // Génération d'une UUID v4
+            $UUID4 = genererUUIDV4();
+
             // Filtre les données du mail rentré dans le formulaire 
             $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-
             // Affectation des valeurs des POST à des variables local + traitement faille XSS
             $nom = htmlspecialchars($_POST['nom'], ENT_NOQUOTES);
             $prenom = htmlspecialchars($_POST['prenom'], ENT_NOQUOTES);
@@ -67,11 +69,11 @@ if (
                             $mdp_hache = password_hash($mdp, PASSWORD_BCRYPT, ['cost' => 10]);
 
                             // Création du nouvel utilisateur.
-                            newUtilisateur($nom, $prenom, $email, $mdp_hache);
+                            newUtilisateur($UUID4, $nom, $prenom, $email, $mdp_hache);
 
                             $msg = "Votre compte utilisateur vient d'être créé avec succès.";
                             $valideConnexion = true;
-                            
+
                         } else {
                             $msgErreur = "Erreur, votre mot de passe doit contenir au moins 8 caractères, des minuscules, majscules et des chiffres";
                         }

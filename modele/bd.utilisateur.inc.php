@@ -94,17 +94,18 @@ function getIdEtMdpParNomEtPrenom(string $nomU, string $prenomU)
     return $resultat;
 }
 
-function newUtilisateur(string $nomUtilisateur, string $prenomUtilisateur, string $emailUtilisateur, 
+function newUtilisateur(string $uuid, string $nomUtilisateur, string $prenomUtilisateur, string $emailUtilisateur, 
                         string $motDePasseUtilisateur)
 {
     $resultat = array();
     try {
         $connexion = connexionPDO();
 
-        $sql = "insert into utilisateur (nomUtilisateur, prenomUtilisateur, emailUtilisateur, motDePasseUtilisateur)
-                VALUES (:nomUtilisateur, :prenomUtilisateur, :emailUtilisateur, :motDePasseUtilisateur)";
+        $sql = "insert into utilisateur (uuid, nomUtilisateur, prenomUtilisateur, emailUtilisateur, motDePasseUtilisateur)
+                VALUES (:uuid, :nomUtilisateur, :prenomUtilisateur, :emailUtilisateur, :motDePasseUtilisateur)";
         $requete = $connexion->prepare($sql);
         $requete->execute(array(
+            ':uuid' => $uuid,
             ':nomUtilisateur' => $nomUtilisateur,
             ':prenomUtilisateur' => $prenomUtilisateur,
             ':emailUtilisateur' => $emailUtilisateur,
@@ -159,4 +160,35 @@ function newFormulaireContact(string $sujetContact, string $messageContact, $idU
         die();
     }
     return $resultat;
+}
+
+function newFormulaireContactEmail(string $sujetContact, string $messageContact, $emailUtilisateur)
+{
+    $resultat = array();
+    try {
+        $connexion = connexionPDO();
+
+        $sql = "insert into contact (sujetContact, messageContact, emailUtilisateur)
+                VALUES (:sujetContact, :messageContact, :emailUtilisateur)";
+        $requete = $connexion->prepare($sql);
+        $requete->execute(array(
+            ':sujetContact' => $sujetContact,
+            ':messageContact' => $messageContact,
+            ':emailUtilisateur' => $emailUtilisateur
+        ));
+    } catch (PDOException $e) {
+        print 'Erreur' . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+function genererUUIDV4($data = null){
+    $data = $data ?? random_bytes(16);
+    assert(strlen($data) == 16);
+
+    $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
+    $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+
+    return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
 }
