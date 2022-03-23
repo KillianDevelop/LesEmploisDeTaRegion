@@ -1,99 +1,115 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
-
-body{
-    align-items: center;
-    background-color: #f2f2f2;
-    font-family: 'Roboto', sans-serif;
+body {
+  align-items: center;
+  background-color: #f2f2f2;
+  font-family: "Roboto", sans-serif;
 }
 
-form{
-    margin-top: 20px;
-    background-color: #fff;
-    padding: 40px;
-    padding-top: 20px;
-    margin: 60px;
-    border-radius: 10px;
-    min-width: 300px;
+form {
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 40px;
+  padding-top: 20px;
+  margin: 60px;
+  border-radius: 10px;
+  min-width: 300px;
 }
 
-form h1{
-    color: #3386FF;
-    text-align: center;
+form h1 {
+  color: #3386ff;
+  text-align: center;
 }
 
-hr{
-    background-color: #f2f2f2; 
-    color: #f2f2f2;
-    border-radius:  10px;
-    outline: none;
-    border: none;
+hr {
+  background-color: #f2f2f2;
+  color: #f2f2f2;
+  border-radius: 10px;
+  outline: none;
+  border: none;
 }
-
 
 form p.txtAuth {
-    font-size: 12px;
-    margin-bottom: 20px;
-    color: #878787;
-    
+  font-size: 12px;
+  margin-bottom: 20px;
+  color: #878787;
 }
 
 form p.txtErreur {
-    font-size: 12px;
-    margin-bottom: 20px;
-    color: red;
+  font-size: 12px;
+  margin-bottom: 20px;
+  color: red;
 }
 
 form p.txtValid {
-    font-size: 12px;
-    margin-bottom: 20px;
-    color: #33FF60;
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #1ADB39;
 }
 
-form p.txtRedigCreeCompte{
-    font-size: 12px;
-    color: #878787;
+form p.txtRedigCreeCompte {
+  font-size: 12px;
+  color: #878787;
 }
 
-form p.txtRedigEntr{
-    font-size: 12px;
-    margin-top: 25px;
-    color: #878787;
-    text-align: center;
-
+form p.txtRedigEntr {
+  font-size: 12px;
+  margin-top: 25px;
+  color: #878787;
+  text-align: center;
 }
 
-form button{
-    padding: 15px 25px;
-    border-radius: 5px;
-    border: none;
-    font-size: 15px;
-    color: #fff;
-    background-color: #3386FF;
-    outline: none;
-    cursor: pointer;
+form button {
+  padding: 15px 25px;
+  border-radius: 5px;
+  border: none;
+  font-size: 15px;
+  color: #fff;
+  background-color: #3386ff;
+  outline: none;
+  cursor: pointer;
 }
 
-form button:hover{
-    background: #33CEFF;
-    color: #fff;
+form button:hover {
+  background: #33ceff;
+  color: #fff;
 }
 
-form input{
-    display: flex;
-    flex-direction: column;
-    width: 95%;
+form input {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
 }
 
-form input[type="email"], input[type="password"]{
-    padding: 15px;
-    border-radius: 5px;
-    border: none;
-    background-color: #f2f2f2;
-    margin-bottom: 15px;
-    outline: none;
+form input[type="email"],
+input[type="password"] {
+  padding: 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: #f2f2f2;
+  margin-bottom: 15px;
+  outline: none;
 }
 
-.red{
-    color: red;
-  }
+.red {
+  color: red;
+}
+
+.inputContact {
+  padding: 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: #f2f2f2;
+  outline: none;
+  width: 100%;
+}
+
+form textarea {
+  padding: 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: #f2f2f2;
+  outline: none;
+  width: 100%;
+  resize: none;
+}

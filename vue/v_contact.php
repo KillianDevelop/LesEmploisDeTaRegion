@@ -41,7 +41,7 @@ and open the template in the editor.
     <p class="txt"> Sujet de votre message <span class="red">*</span></p>
 
     <div class="inputs">
-        <input type="text" name="titre" required="required"><br>
+        <input class="inputContact" type="text" name="titre" required="required"><br>
         <p>
         <p class="txt">
             Message <span class="red">*</span>
