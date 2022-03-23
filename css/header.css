@@ -11,6 +11,7 @@ HTML, body{
   line-height: 66px;
   background: #3386FF;
   padding : 0px 10px;
+  box-shadow: 1px 7px 31px 2px rgba(0,0,0,0.32);  
 }
 
 .inner {
