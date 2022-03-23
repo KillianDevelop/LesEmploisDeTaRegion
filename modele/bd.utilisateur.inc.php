@@ -140,18 +140,19 @@ function verif_existe(string $emailUtilisateur){
     return $valide;
 }
 
-function newFormulaireContact(string $sujetContact, string $messageContact)
+function newFormulaireContact(string $sujetContact, string $messageContact, $idUtilisateur)
 {
     $resultat = array();
     try {
         $connexion = connexionPDO();
 
-        $sql = "insert into contact (sujetContact, messageContact)
-                VALUES (:sujetContact, :messageContact)";
+        $sql = "insert into contact (sujetContact, messageContact, idUtilisateur)
+                VALUES (:sujetContact, :messageContact, :idUtilisateur)";
         $requete = $connexion->prepare($sql);
         $requete->execute(array(
             ':sujetContact' => $sujetContact,
-            ':messageContact' => $messageContact
+            ':messageContact' => $messageContact,
+            ':idUtilisateur' => $idUtilisateur
         ));
     } catch (PDOException $e) {
         print 'Erreur' . $e->getMessage();

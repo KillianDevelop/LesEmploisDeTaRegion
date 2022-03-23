@@ -15,11 +15,13 @@ if ( $_SERVER["SCRIPT_FILENAME"] == __FILE__ ){
 include "$racine/modele/bd.utilisateur.inc.php";
 
 $msgErreur = "";
+$msg = "";
 
 if (isset($_POST["titre"]) && isset($_POST["message"])){
     if (!empty($_POST["titre"]) && !empty($_POST["message"])){
 
-        newFormulaireContact($_POST["titre"], $_POST["message"]);
+        newFormulaireContact($_POST["titre"], $_POST["message"], $_SESSION["idUtil"]);
+        $msg = "Votre formulaire de contact vient d'être créé avec succès.";
 
     }else{
         $msgErreur = "Erreur, tous les champs du formulaire doivent être complétés.";

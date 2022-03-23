@@ -92,3 +92,7 @@ form input[type="email"], input[type="password"]{
     margin-bottom: 15px;
     outline: none;
 }
+
+.red{
+    color: red;
+  }
