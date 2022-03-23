@@ -94,9 +94,12 @@ function getIdEtMdpParNomEtPrenom(string $nomU, string $prenomU)
     return $resultat;
 }
 
-function newUtilisateur(string $nomUtilisateur, string $prenomUtilisateur, string $emailUtilisateur, 
-                        string $motDePasseUtilisateur)
-{
+function newUtilisateur(
+    string $nomUtilisateur,
+    string $prenomUtilisateur,
+    string $emailUtilisateur,
+    string $motDePasseUtilisateur
+) {
     $resultat = array();
     try {
         $connexion = connexionPDO();
@@ -117,23 +120,23 @@ function newUtilisateur(string $nomUtilisateur, string $prenomUtilisateur, strin
     return $resultat;
 }
 
-function verif_existe(string $emailUtilisateur){
+function verif_existe(string $emailUtilisateur)
+{
     $valide = false;
-    try{
+    try {
         $connexion = connexionPDO();
         $sql = "SELECT count(U.idUtilisateur) as 'existe'"
-                . " FROM utilisateur U"
-                . " WHERE U.emailUtilisateur = :emailUtilisateur";
+            . " FROM utilisateur U"
+            . " WHERE U.emailUtilisateur = :emailUtilisateur";
         $requete = $connexion->prepare($sql);
         $requete->execute(array(':emailUtilisateur' => $emailUtilisateur));
 
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
 
-        if ($resultat === 1){
+        if ($resultat['existe'] !== 0) {
             $valide = true;
         }
-
-    }catch(PDOException $e){
+    } catch (PDOException $e) {
         print 'Erreur, ' . $e->getMessage();
         die();
     }
