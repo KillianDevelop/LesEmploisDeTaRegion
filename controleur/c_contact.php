@@ -29,9 +29,9 @@ if (isset($_POST["titre"]) && isset($_POST["message"])) {
 
                     $titre = htmlspecialchars($_POST['titre'], ENT_NOQUOTES);
                     $message = htmlspecialchars($_POST['message'], ENT_NOQUOTES);
-                    newFormulaireContactEmail($titre, $message, $_SESSION["mailU"]);
+                    newFormulaireContact($titre, $message, $_SESSION["idUtil"]);
                     $msg = "Votre formulaire de contact vient d'être créé avec succès.";
-                    
+
                 } else {
                     $msgErreur = "Vous avez dépassé le nombre maximal de caractères (500) dans votre message.";
                 }

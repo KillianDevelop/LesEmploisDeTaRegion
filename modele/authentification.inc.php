@@ -30,7 +30,7 @@ function login(string $melU, string $mdpU)
 
     // Vérification de l'existance d'un visiteur correspondant
     // aux informations données
-    if ((isset($utilisateur["idUtilisateur"])) && !empty($utilisateur["idUtilisateur"])) {
+    if ((isset($utilisateur["uuidUtilisateur"])) && !empty($utilisateur["uuidUtilisateur"])) {
 
         // Affectation à la variable de la valeur du mot de passe de l'utilisateur
         $mdp = $utilisateur["motDePasseUtilisateur"];
@@ -39,7 +39,7 @@ function login(string $melU, string $mdpU)
         if (password_verify($mdpU, $mdp)) {
 
             // Déclaration d'une variable contenant l'id de l'utilisateur
-            $_SESSION["idUtil"] =  $utilisateur["idUtilisateur"];
+            $_SESSION["idUtil"] =  $utilisateur["uuidUtilisateur"];
 
             // Déclaration d'élément dans le tableau $_SESSION contenant les données
             // de l'utilisateur s'étant connecté

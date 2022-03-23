@@ -27,7 +27,7 @@ function getUtilisateurByMail(string $melU)
         * et la date de création du compte de l'utilisateur authentifié
         */
 
-        $sql = "select u.idUtilisateur, u.nomUtilisateur, u.prenomUtilisateur,"
+        $sql = "select u.uuidUtilisateur, u.nomUtilisateur, u.prenomUtilisateur,"
             . " u.emailUtilisateur, u.motDePasseUtilisateur, u.dateCreationCompteUtilisateur"
             . " from utilisateur u"
             . " where u.emailUtilisateur = :melU";
@@ -69,7 +69,7 @@ function getIdEtMdpParNomEtPrenom(string $nomU, string $prenomU)
         * et la date de création du compte de l'utilisateur authentifié
         */
 
-        $sql = "select u.idUtilisateur, u.emailUtilisateur"
+        $sql = "select u.uuidUtilisateur, u.emailUtilisateur"
             . " from utilisateur u"
             . " where u.nomUtilisateur = :nomU and u.prenomUtilisateur = :prenomU";
 
@@ -94,18 +94,18 @@ function getIdEtMdpParNomEtPrenom(string $nomU, string $prenomU)
     return $resultat;
 }
 
-function newUtilisateur(string $uuid, string $nomUtilisateur, string $prenomUtilisateur, string $emailUtilisateur, 
+function newUtilisateur(string $uuidUtilisateur, string $nomUtilisateur, string $prenomUtilisateur, string $emailUtilisateur, 
                         string $motDePasseUtilisateur)
 {
     $resultat = array();
     try {
         $connexion = connexionPDO();
 
-        $sql = "insert into utilisateur (uuid, nomUtilisateur, prenomUtilisateur, emailUtilisateur, motDePasseUtilisateur)
-                VALUES (:uuid, :nomUtilisateur, :prenomUtilisateur, :emailUtilisateur, :motDePasseUtilisateur)";
+        $sql = "insert into utilisateur (uuidUtilisateur, nomUtilisateur, prenomUtilisateur, emailUtilisateur, motDePasseUtilisateur)
+                VALUES (:uuidUtilisateur, :nomUtilisateur, :prenomUtilisateur, :emailUtilisateur, :motDePasseUtilisateur)";
         $requete = $connexion->prepare($sql);
         $requete->execute(array(
-            ':uuid' => $uuid,
+            ':uuidUtilisateur' => $uuidUtilisateur,
             ':nomUtilisateur' => $nomUtilisateur,
             ':prenomUtilisateur' => $prenomUtilisateur,
             ':emailUtilisateur' => $emailUtilisateur,
@@ -122,7 +122,7 @@ function verif_existe(string $emailUtilisateur){
     $valide = false;
     try{
         $connexion = connexionPDO();
-        $sql = "SELECT count(U.idUtilisateur) as 'existe'"
+        $sql = "SELECT count(U.uuidUtilisateur) as 'existe'"
                 . " FROM utilisateur U"
                 . " WHERE U.emailUtilisateur = :emailUtilisateur";
         $requete = $connexion->prepare($sql);
@@ -141,40 +141,20 @@ function verif_existe(string $emailUtilisateur){
     return $valide;
 }
 
-function newFormulaireContact(string $sujetContact, string $messageContact, $idUtilisateur)
+
+function newFormulaireContact(string $sujetContact, string $messageContact, string $uuidUtilisateur)
 {
     $resultat = array();
     try {
         $connexion = connexionPDO();
 
-        $sql = "insert into contact (sujetContact, messageContact, idUtilisateur)
-                VALUES (:sujetContact, :messageContact, :idUtilisateur)";
+        $sql = "insert into contact (sujetContact, messageContact, uuidUtilisateur)
+                VALUES (:sujetContact, :messageContact, :uuidUtilisateur)";
         $requete = $connexion->prepare($sql);
         $requete->execute(array(
             ':sujetContact' => $sujetContact,
             ':messageContact' => $messageContact,
-            ':idUtilisateur' => $idUtilisateur
-        ));
-    } catch (PDOException $e) {
-        print 'Erreur' . $e->getMessage();
-        die();
-    }
-    return $resultat;
-}
-
-function newFormulaireContactEmail(string $sujetContact, string $messageContact, $emailUtilisateur)
-{
-    $resultat = array();
-    try {
-        $connexion = connexionPDO();
-
-        $sql = "insert into contact (sujetContact, messageContact, emailUtilisateur)
-                VALUES (:sujetContact, :messageContact, :emailUtilisateur)";
-        $requete = $connexion->prepare($sql);
-        $requete->execute(array(
-            ':sujetContact' => $sujetContact,
-            ':messageContact' => $messageContact,
-            ':emailUtilisateur' => $emailUtilisateur
+            ':uuidUtilisateur' => $uuidUtilisateur
         ));
     } catch (PDOException $e) {
         print 'Erreur' . $e->getMessage();
