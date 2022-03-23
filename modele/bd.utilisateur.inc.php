@@ -129,7 +129,7 @@ function verif_existe(string $emailUtilisateur){
 
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
 
-        if ($resultat === 1){
+        if ($resultat["existe"] !==0){
             $valide = true;
         }
 

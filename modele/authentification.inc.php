@@ -79,14 +79,17 @@ function estConnecte()
     if (isset($_POST["login"]) && isset($_POST["password"])) {
         // Permet de générer l'authentification dès que l'utilisateur aura remplis le formulaire
         if (isset($_SESSION["mailU"])) {
+
             // Récupère les informations de l'utilisateur à partir du mail rentré en paramètre
             $utilisateur = getUtilisateurByMail($_SESSION["mailU"]);
-            // Vérifie si le mail et le mdp corresponde aux informations sur la bdd
-            if (
-                $utilisateur["emailUtilisateur"] === $_SESSION["mailU"]
-                && $utilisateur["motDePasseUtilisateur"] === $_SESSION["mdpUtil"]
-            ) {
-                $valide = true;
+            if (isset($utilisateur["emailUtilisateur"]) && isset($utilisateur["motDePasseUtilisateur"])) {
+                // Vérifie si le mail et le mdp corresponde aux informations sur la bdd
+                if (
+                    $utilisateur["emailUtilisateur"] === $_SESSION["mailU"]
+                    && $utilisateur["motDePasseUtilisateur"] === $_SESSION["mdpUtil"]
+                ) {
+                    $valide = true;
+                }
             }
         }
     }

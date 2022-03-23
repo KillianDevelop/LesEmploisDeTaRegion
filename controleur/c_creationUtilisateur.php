@@ -49,35 +49,34 @@ if (
             if (preg_match("/^[A-Za-z][A6Za-z\é\è\ê\-]+$/", $nom) && preg_match("/^[A-Za-z][A6Za-z\é\è\ê\-]+$/", $prenom)) {
                 // Vérifie que le mail rentré par l'utilisateur respecte le format standard.
                 if (preg_match(" /^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/ ", $email)) {
-                    // Vérifie que les deux mots de passe possèdent au moins 8 caractères, des majuscules, minuscules et des chiffres.
-                    if (
-                        preg_match("/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/", $mdp) &&
-                        preg_match("/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/", $mdp2)
-                    ) {
-                        // Met le nom/prenom en minuscule permettra d'ensuite uniformiser les nom/prenom dans la bdd
-                        $verif_nom = strtolower($nom);
-                        $verif_prenom = strtolower($prenom);
-                        // Met la première lettre du string en majuscule 
-                        $nom = ucwords($verif_nom);
-                        $prenom = ucwords($verif_prenom);
 
-                        // ! Verifier si l'email est déjà utilisé
-                        //?var_dump(verif_existe($email));
-                        //?if (verif_existe($email) === false ){
-                        // Hashage du mot de passe de l'utilisateur 
-                        $mdp_hache = password_hash($mdp, PASSWORD_BCRYPT, ['cost' => 10]);
+                    if (!verif_existe($email)) {
+                        // Vérifie que les deux mots de passe possèdent au moins 8 caractères, des majuscules, minuscules et des chiffres.
+                        if (
+                            preg_match("/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/", $mdp) &&
+                            preg_match("/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/", $mdp2)
+                        ) {
+                            // Met le nom/prenom en minuscule permettra d'ensuite uniformiser les nom/prenom dans la bdd
+                            $verif_nom = strtolower($nom);
+                            $verif_prenom = strtolower($prenom);
+                            // Met la première lettre du string en majuscule 
+                            $nom = ucwords($verif_nom);
+                            $prenom = ucwords($verif_prenom);
 
-                        // Création du nouvel utilisateur.
-                        newUtilisateur($nom, $prenom, $email, $mdp_hache);
+                            // Hashage du mot de passe de l'utilisateur 
+                            $mdp_hache = password_hash($mdp, PASSWORD_BCRYPT, ['cost' => 10]);
 
-                        $msg = "Votre compte utilisateur vient d'être créé avec succès.";
-                        $valideConnexion = true;
-                        //?}else{
-                        //? $msgErreur = "Erreur, ce mail est déjà associés à un compte Utilisateur";
-                        //?}
+                            // Création du nouvel utilisateur.
+                            newUtilisateur($nom, $prenom, $email, $mdp_hache);
 
+                            $msg = "Votre compte utilisateur vient d'être créé avec succès.";
+                            $valideConnexion = true;
+                            
+                        } else {
+                            $msgErreur = "Erreur, votre mot de passe doit contenir au moins 8 caractères, des minuscules, majscules et des chiffres";
+                        }
                     } else {
-                        $msgErreur = "Erreur, votre mot de passe doit contenir au moins 8 caractères, des minuscules, majscules et des chiffres";
+                        $msgErreur = "Erreur, le mail est déjà associé à un compte.";
                     }
                 } else {
                     $msgErreur = "Erreur, le mail ne respecte pas le format d'un mail standard.";
