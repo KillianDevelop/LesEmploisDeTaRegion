@@ -20,6 +20,9 @@ function controleurPrincipal(string $action){
     $lesActions["deconnexion"] = "c_deconnexion.php";
     $lesActions["contact"] = "c_contact.php";
     $lesActions["accueil"] = "c_accueil.php";
+    $lesActions["a-propos"] = "c_a-propos.php";
+    $lesActions["profil"] = "c_profil.php";
+
     if (array_key_exists( $action , $lesActions )){
         return $lesActions[$action];
     }
