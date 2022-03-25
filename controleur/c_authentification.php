@@ -30,6 +30,7 @@ if (isset($_POST["login"]) && isset($_POST["password"])) {
             // Filtrage des données du formulaire + gestion des failles XSS
             $login = filter_input(INPUT_POST, 'login', FILTER_VALIDATE_EMAIL);
             $password = htmlspecialchars($_POST['password'], ENT_NOQUOTES);
+            
         } else {
             $msgErreur = "Erreur, l'adresse mail n'est pas conforme";
         }

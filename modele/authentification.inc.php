@@ -47,7 +47,7 @@ function login(string $melU, string $mdpU)
             $_SESSION["prenomUtil"] = $utilisateur["prenomUtilisateur"];
             $_SESSION["mdpUtil"] = $mdp;
             $_SESSION["mailU"] = $utilisateur["emailUtilisateur"];
-
+            $_SESSION["dateCreationUtil"] = $utilisateur["dateCreationCompteUtilisateur"];
             // Évolution du besoin d'un message erreur
             $valide = FALSE;
         }

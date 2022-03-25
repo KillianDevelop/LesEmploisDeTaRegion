@@ -13,6 +13,7 @@
             <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/modele/pdo.inc.php</file>
             <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/css/style.css</file>
             <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/controleur/c_authentification.php</file>
+            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/modele/bd.utilisateur.inc.php</file>
             <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/vue/v_authentificationUtilisateur.php</file>
             <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/vue/v_creationUtilisateur.php</file>
             <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/controleur/c_principal.php</file>
