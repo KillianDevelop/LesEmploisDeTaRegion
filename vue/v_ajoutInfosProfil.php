@@ -54,14 +54,14 @@
 
             <div class="inputs">
                 </p>
-                <textarea name="message" cols="40" rows="15" placeholder="Ecrire un commentaire" ></textarea>
+                <textarea name="sommaireUtilisateur" cols="40" rows="15" placeholder="Ecrire un commentaire" ></textarea>
             </div>
             <div class="div-principal">
                 <div class="div-sec">
-                    <input class="input" name="nom" type="text" placeholder="Votre Entreprise"></input>
+                    <input class="input" name="entrepriseUtilisateur" type="text" placeholder="Votre Entreprise"></input>
                 </div>
                 <div class="div-sec">
-                    <input class="input" name="prenom" type="text" placeholder="Votre Poste"></input>
+                    <input class="input" name="posteUtilisateur" type="text" placeholder="Votre Poste"></input>
                 </div>
             </div>
             <button type="submit">Envoyer</button>

@@ -172,3 +172,26 @@ function genererUUIDV4($data = null){
 
     return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
 }
+
+function newInfosUtilisateur(string $uuidUtilisateur, string $sommaireUtilisateur, string $entrepriseUtilisateur, string $posteUtilisateur)
+{
+    $resultat = array();
+    try {
+        $connexion = connexionPDO();
+
+        $sql = "UPDATE utilisateur u SET sommaireUtilisateur = :sommaireUtilisateur, entrepriseUtilisateur = :entrepriseUtilisateur,
+                posteUtilisateur = :posteUtilisateur WHERE uuidUtilisateur = :uuidUtilisateur";
+        $requete = $connexion->prepare($sql);
+        $requete->execute(array(
+            ':uuidUtilisateur' => $uuidUtilisateur,
+            ':sommaireUtilisateur' => $sommaireUtilisateur,
+            ':entrepriseUtilisateur' => $entrepriseUtilisateur,
+            ':posteUtilisateur' => $posteUtilisateur
+        ));
+    } catch (PDOException $e) {
+        print 'Erreur' . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
