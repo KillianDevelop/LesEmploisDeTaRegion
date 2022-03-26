@@ -6,7 +6,8 @@
     <div class="aside">
         <br>
         <div class="iconepen">
-        <a href="./?action=ajoutInfosProfil"><i class="fa-solid fa-pen"></i></i></a>
+            <acronym title="Completez votre profil utilisateur"><a href="./?action=ajoutInfosProfil"><i class="fa-solid fa-pen"></i>
+                </a></acronym>
 
             <br>
         </div>
@@ -14,12 +15,14 @@
             <i class="fa-solid fa-circle-user"></i>
         </div>
         <h3><?php echo $_SESSION["prenomUtil"] . " " . $_SESSION["nomUtil"] ?></h3>
-        <br><br>
+        <br>
+        <hr width="80%" size="5" align="center" NOSHADE>
+        <br>
         <h2>Email : </h2>
-        <h4><?php echo $_SESSION["mailU"]?></h4>
+        <h4><?php echo $_SESSION["mailU"] ?></h4>
         <br>
         <h2>Compte créé : </h2>
-        <h4>Le <?php echo $_SESSION["dateCreationUtil"]?></h4>
+        <h4>Le <?php echo $_SESSION["dateCreationUtil"] ?></h4>
     </div>
 
     <div class="boxtop">

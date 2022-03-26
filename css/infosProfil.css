@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+    font-family: 'Roboto', sans-serif;
+  }
+  .parent {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 50px repeat(2, 1fr) 50px;
+    grid-column-gap: 50px;
+    grid-row-gap: 50px;
+  }
+  
+  .aside {
+    grid-area: 2 / 1 / 5 / 2;
+    height: 500px;
+    margin-left: 50px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  
+  .aside h3 {
+    text-align: center;
+    color: #878787;
+  }
+  
+  
+  .aside h2, h4 {
+      text-align: left;
+      margin-left :  15px;
+      color: #878787;
+    }
+
+  .aside i {
+    text-align: center;
+  }
+  
+  .boxtop {
+    grid-area: 2 / 2 / 5 / 5;
+    margin-right: 50px;
+    height : 500px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  
+    
+  .boxtop h2, h4 {
+      text-align: left;
+      margin-left :  15px;
+    }
+  
+  .iconeprofil {
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    color: #3386FF;
+  }
+  
+  
+form h1{
+    color: #3386FF;
+    text-align: center;
+}
+
+hr{
+    background-color: #f2f2f2; 
+    color: #f2f2f2;
+    border-radius:  10px;
+    outline: none;
+    border: none;
+    width: 95%;
+}
+
+
+form button{
+    display: block;
+    padding: 15px 25px;
+    border-radius: 5px;
+    border: none;
+    font-size: 15px;
+    color: #fff;
+    background-color: #3386FF;
+    outline: none;
+    cursor: pointer;
+    margin: auto;
+    margin-top: 15px;
+}
+
+form button:hover{
+    background: #33CEFF;
+    color: #fff;
+}
+
+form textarea {
+    padding: 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: #f2f2f2;
+    outline: none;
+    width: 90%;
+    height: 20%;
+    resize: none;
+    margin-left: 50px;
+    margin-bottom: 20px;
+  }
+  
+  form p.txt {
+    font-size: 12px;
+    color: #878787;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+form .inputs-text{
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+
+}
+
+form .input[type="text"]{
+    padding: 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: #f2f2f2;
+    margin-bottom: 15px;
+    outline: none;
+    margin-left: 50px;
+    margin-top: 15px;
+    width: 90%;
+}

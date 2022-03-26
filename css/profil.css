@@ -1,38 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 body {
   margin: 0;
   padding: 0;
+  background-color: #f2f2f2;
+  font-family: 'Roboto', sans-serif;
 }
+
 .parent {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 50px repeat(2, 1fr) 50px;
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
+  grid-column-gap: 50px;
+  grid-row-gap: 50px;
+}
+
+hr{
+    background-color: #f2f2f2; 
+    color: #f2f2f2;
+    border-radius:  10px;
+    outline: none;
+    border: none;
 }
 
 .aside {
   grid-area: 2 / 1 / 4 / 2;
   height: 100%;
   margin-left: 50px;
-  background-color: #f2f2f2;
+  background-color: white;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .aside h3 {
   text-align: center;
+  color: #878787;
+
 }
 
 
 .aside h2, h4 {
     text-align: left;
     margin-left :  15px;
+    color: #878787;
+
   }
 
 .boxbot {
   grid-area: 3 / 2 / 4 / 5;
   margin-right: 50px;
-  background-color: #f2f2f2;
+  background-color: white;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;}
 
@@ -43,24 +60,33 @@ body {
 .boxbot h2, h4 {
   text-align: left;
   margin-left :  15px;
+  color: #878787;
+
 }
 .boxtop {
   grid-area: 2 / 2 / 3 / 5;
   margin-right: 50px;
-  background-color: #f2f2f2;
+  background-color: white;
   border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;}
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color: #878787;
+
+}
 
   
 .boxtop h2, h4 {
     text-align: left;
     margin-left :  15px;
+    color: #878787;
+
   }
 
 .iconeprofil {
   display: flex;
   justify-content: center;
   font-size: 50px;
+  color: #3386FF;
+
 }
 
 .iconepen {

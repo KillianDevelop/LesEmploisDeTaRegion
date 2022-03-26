@@ -22,6 +22,7 @@ function controleurPrincipal(string $action){
     $lesActions["accueil"] = "c_accueil.php";
     $lesActions["a-propos"] = "c_a-propos.php";
     $lesActions["profil"] = "c_profil.php";
+    $lesActions["ajoutInfosProfil"] = "c_ajoutInfosProfil.php";
 
     if (array_key_exists( $action , $lesActions )){
         return $lesActions[$action];
