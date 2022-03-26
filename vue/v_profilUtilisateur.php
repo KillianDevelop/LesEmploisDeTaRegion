@@ -27,16 +27,24 @@
 
     <div class="boxtop">
         <h2>Informations : </h2>
-        <h4>Je suis etudiant en ...</h4>
+        <h4><?php if (isset($sommaireUtilisateur)) {
+                echo $sommaireUtilisateur;
+            } else {
+                echo "Complétez votre profil en cliquant sur le stylo au-dessus de votre icône utilisateur.";
+            } ?></h4>
 
     </div>
 
     <div class="boxbot">
         <h2> Membre de : </h2>
-        <h4> Nom de l'entreprise </h4>
+        <h4><?php if (isset($entrepriseUtilisateur)) {
+                echo $entrepriseUtilisateur;
+            } ?></h4>
         <br>
         <h2> Poste occupé : </h2>
-        <h4> Employé </h4>
+        <h4><?php if(isset($posteUtilisateur)){
+            echo $posteUtilisateur;
+        } ?></h4>
     </div>
 
     <div class="footer"> </div>

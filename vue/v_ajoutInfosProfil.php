@@ -26,8 +26,8 @@
                 <?php
                 // Permet de gérer l'apparition des messages d'erreurs
                 if (
-                    isset($_POST["nom"]) && isset($_POST["prenom"]) &&
-                    isset($_POST["email"]) && isset($_POST["mdp"])
+                    isset($_POST["sommaireUtilisateur"]) && isset($_POST["entrepriseUtilisateur"]) &&
+                    isset($_POST["posteUtilisateur"])
                 ) {
                     if ($msgErreur !== "") {
                         echo $msgErreur;
@@ -39,30 +39,32 @@
                 <?php
                 // Permet de gérer l'apparition des messages d'erreurs
                 if (
-                    isset($_POST["nom"]) && isset($_POST["prenom"]) &&
-                    isset($_POST["email"]) && isset($_POST["mdp"])
+                    isset($_POST["sommaireUtilisateur"]) && isset($_POST["entrepriseUtilisateur"]) &&
+                    isset($_POST["posteUtilisateur"])
                 ) {
-                    if ($msg !== "") {
-                        echo $msg;
+                    if ($message !== "") {
+                        echo $message;
                     }
                 }
                 ?></p>
             <p class="txt">Vous pouvez évoquer votre experience, votre domaine d'activité
                 ou vos compétences. Certains choisissent aussi de parler de leurs accomplissements
-                oud de leurs postes précédents.
+                ou de leurs postes précédents, à vous de choisir !
             </p>
 
             <div class="inputs">
                 </p>
-                <textarea name="sommaireUtilisateur" cols="40" rows="15" placeholder="Ecrire un commentaire" ></textarea>
+                <textarea name="sommaireUtilisateur" cols="40" rows="15" placeholder="Ecrire un commentaire" required="required"></textarea>
             </div>
             <div class="div-principal">
                 <div class="div-sec">
-                    <input class="input" name="entrepriseUtilisateur" type="text" placeholder="Votre Entreprise"></input>
+                    <input class="input" name="entrepriseUtilisateur" type="text" placeholder="Votre Entreprise" required="required"></input>
                 </div>
                 <div class="div-sec">
-                    <input class="input" name="posteUtilisateur" type="text" placeholder="Votre Poste"></input>
+                    <input class="input" name="posteUtilisateur" type="text" placeholder="Votre Poste" required="required"></input>
                 </div>
+                <p class="txt">Si vous n'avez actuellement aucun emploi, ajoutez <b>"En recherche d'emploi"</b> dans les deux champs.                 </p>
+
             </div>
             <button type="submit">Envoyer</button>
     </div>

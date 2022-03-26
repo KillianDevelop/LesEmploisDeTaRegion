@@ -195,3 +195,44 @@ function newInfosUtilisateur(string $uuidUtilisateur, string $sommaireUtilisateu
     return $resultat;
 }
 
+function getInfosUtilisateurByUuid(string $uuidUtilisateur)
+{
+
+    // Déclaration d'une variable tableau vide de résultat
+    $resultat = array();
+
+    try {
+
+        // Déclaration d'un variable contenant les informations de connexion
+        // à la base de données via PDO
+        $connexion = connexionPDO();
+
+        /* 
+        * Déclaration de la requête SQL à exécuter
+        * La requête retournera l'id , le nom, le prénom, mail,
+        * et la date de création du compte de l'utilisateur authentifié
+        */
+
+        $sql = "select u.sommaireUtilisateur, u.entrepriseUtilisateur, u.posteUtilisateur"
+            . " from utilisateur u"
+            . " where u.uuidUtilisateur = :uuidUtilisateur";
+
+        // Préparation de la requête SQL
+        // Préparation de la requête SQL
+        $requete = $connexion->prepare($sql);
+        $requete->bindValue(':uuidUtilisateur', $uuidUtilisateur, PDO::PARAM_STR);
+        $requete->execute();
+        // Affectation d'un tableau associatif contenant les informations de l'utilisateur
+        // ("nom_du_champ" => "valeur_du_champ")
+        $resultat = $requete->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+
+        // Affichage d'un message contextuel d'erreur
+        print "Erreur !: " . $e->getMessage();
+
+        // Arrêt du code
+        die();
+    }
+
+    return $resultat;
+}

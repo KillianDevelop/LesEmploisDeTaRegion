@@ -23,21 +23,35 @@ if (isset($_POST["sommaireUtilisateur"]) && isset($_POST["entrepriseUtilisateur"
             filter_has_var(INPUT_POST, "sommaireUtilisateur") && filter_has_var(INPUT_POST, "entrepriseUtilisateur")
             && filter_has_var(INPUT_POST, "posteUtilisateur")
         ) {
-
             $sommaireUtilisateur = htmlspecialchars($_POST["sommaireUtilisateur"], ENT_NOQUOTES);
             $entrepriseUtilisateur = htmlspecialchars($_POST["entrepriseUtilisateur"], ENT_NOQUOTES);
             $posteUtilisateur = htmlspecialchars($_POST["posteUtilisateur"], ENT_NOQUOTES);
 
-            newInfosUtilisateur($_SESSION["idUtil"], $sommaireUtilisateur, $entrepriseUtilisateur, $posteUtilisateur);
-            $message = "Informations utilisateur ajouté avec succès.";
+            if (strlen($sommaireUtilisateur) <= 300) {
 
-        }else{
+                if (strlen($entrepriseUtilisateur) <= 100) {
+
+                    if (strlen($posteUtilisateur) <= 60) {
+
+                        newInfosUtilisateur($_SESSION["idUtil"], $sommaireUtilisateur, $entrepriseUtilisateur, $posteUtilisateur);
+                        $message = "Informations utilisateur actualisé avec succès.";
+
+                    } else {
+                        $msgErreur = "Le nom de votre poste ne doit pas dépasser 60 caractères.";
+                    }
+                } else {
+                    $msgErreur = "Le nom de votre entreprise ne doit pas dépasser 100 caractères.";
+                }
+            } else {
+                $msgErreur = "Votre sommaire ne doit pas dépasser 300 caractères.";
+            }
+        } else {
             $msgErreur = "Erreur, tous les champs du formulaire doivent être complétés.";
         }
-    }else{
+    } else {
         $msgErreur = "Erreur, tous les champs du formulaire doivent être complétés.";
     }
-}else{
+} else {
     $msgErreur = "Erreur, tous les champs du formulaire doivent êtres complétés.";
 }
 

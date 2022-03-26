@@ -71,9 +71,14 @@ if (
                             // Création du nouvel utilisateur.
                             newUtilisateur($UUID4, $nom, $prenom, $email, $mdp_hache);
 
+                            $_SESSION["nomUtil"] = $nom;
+                            $_SESSION["prenomUtil"] = $prenom;
+                            $_SESSION["mailU"] = $email;
+                            // ! Ajoutez une méthode pour recup la date
+                            //$_SESSION["dateCreationUtil"] = ;
+
                             $msg = "Votre compte utilisateur vient d'être créé avec succès.";
                             $valideConnexion = true;
-
                         } else {
                             $msgErreur = "Erreur, votre mot de passe doit contenir au moins 8 caractères, des minuscules, majscules et des chiffres";
                         }

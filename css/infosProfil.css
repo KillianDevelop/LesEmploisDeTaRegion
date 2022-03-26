@@ -16,7 +16,7 @@ body {
   
   .aside {
     grid-area: 2 / 1 / 5 / 2;
-    height: 500px;
+    height: 600px;
     margin-left: 50px;
     background-color: white;
     border-radius: 20px;
@@ -42,7 +42,7 @@ body {
   .boxtop {
     grid-area: 2 / 2 / 5 / 5;
     margin-right: 50px;
-    height : 500px;
+    height : 600px;
     background-color: white;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -88,7 +88,7 @@ form button{
     outline: none;
     cursor: pointer;
     margin: auto;
-    margin-top: 15px;
+    margin-top: 30px;
 }
 
 form button:hover{
@@ -113,7 +113,7 @@ form textarea {
     font-size: 12px;
     color: #878787;
     margin-left: 50px;
-    margin-top: 20px;
+    margin-right : 50px;
 }
 
 form .inputs-text{
@@ -131,6 +131,20 @@ form .input[type="text"]{
     margin-bottom: 15px;
     outline: none;
     margin-left: 50px;
-    margin-top: 15px;
+    margin-top: 10px;
     width: 90%;
+}
+
+form p.txtErreur {
+    font-size: 15px;
+    margin-bottom: 20px;
+    color: red;
+    margin-left: 50px;
+}
+
+form p.txtValid {
+    font-size: 15px;
+    margin-bottom: 20px;
+    color: #33FF60;
+    margin-left: 50px;
 }
