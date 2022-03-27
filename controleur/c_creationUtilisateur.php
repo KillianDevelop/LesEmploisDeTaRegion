@@ -102,7 +102,7 @@ if (
 }
 
 if ($valideConnexion === true) {
-    include "$racine/controleur/c_accueil.php";
+    include_once "$racine/controleur/c_accueil.php";
 } else {
     // Appel du script de vue qui permet de gérer l'affichage des données
     $titre = "Création Utilisateur";
