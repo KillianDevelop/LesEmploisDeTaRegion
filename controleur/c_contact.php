@@ -50,3 +50,4 @@ if (isset($_POST["titre"]) && isset($_POST["message"])) {
 
 include "$racine/vue/header.php";
 include_once "$racine/vue/v_contact.php";
+include_once "$racine/vue/footer.php";

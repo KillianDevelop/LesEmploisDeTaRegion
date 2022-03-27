@@ -57,3 +57,4 @@ if (isset($_POST["sommaireUtilisateur"]) && isset($_POST["entrepriseUtilisateur"
 
 include_once "$racine/vue/header.php";
 include_once "$racine/vue/v_ajoutInfosProfil.php";
+include_once "$racine/vue/footer.php";
