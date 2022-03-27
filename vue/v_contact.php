@@ -1,60 +1,50 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<script src="https://kit.fontawesome.com/60856e5448.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="css/contact.css">
 
-<html>
+<div class="parent">
+    <div class="box">
+        <form method="POST">
+            <h1> Formulaire de Contact </h1>
+            <hr width="100%" size="5" align="center" NOSHADE>
+            </p>
+            <p class="txt">Une remarque ? une suggestion ? N'hésitez-pas à écrire un formulaire
+            </p>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulaire de Contact</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
+            <p class="txtErreur">
+                <?php
+                // Permet de gérer l'apparition des messages d'erreurs
+                if (
+                    isset($_POST["titre"]) && isset($_POST["message"])
+                ) {
+                    if ($msgErreur !== "") {
+                        echo $msgErreur;
+                    }
+                }
+                ?></p>
 
-<form method="POST">
-    <h1> Formulaire de Contact </h1>
-    <hr width="100%" size="5" align="center" NOSHADE>
-    <p class="txtErreur">
-        <?php
-        // Permet de gérer l'apparition des messages d'erreurs
-        if (isset($_POST["titre"]) && isset($_POST["message"])) {
-            if ($msgErreur !== "") {
-                echo $msgErreur;
-            }
-        }
-        ?></p>
+            <p class="txtValid">
+                <?php
+                // Permet de gérer l'apparition des messages d'erreurs
+                if (
+                    isset($_POST["titre"]) && isset($_POST["message"])
+                ) {
+                    if ($msg !== "") {
+                        echo $msg;
+                    }
+                }
+                ?>
+            <div class="inputs">
+                <p class="txt">Sujet de votre message <span class="red">*</span></p>
+                <input class="input" name="titre" type="text" required="required"></input>
+                <p class="txt">Votre message <span class="red">*</span></p>
+                <textarea name="message" cols="40" rows="15" placeholder="Ecrire un commentaire" required="required"></textarea>
+            </div>
+            <p class='txtAuth'><i><span class="red">*</span> Champ requis </i></p>
+            <div class="div-principal">
+                <div class="div-sec">
+                    <button type="submit">Envoyer</button>
+                </div>
 
-    <p class="txtValid">
-        <?php
-        // Permet de gérer l'apparition des messages d'erreurs
-        if (isset($_POST["titre"]) && isset($_POST["message"])) {
-            if ($msg !== "") {
-                echo $msg;
-            }
-        }
-        ?></p>
-
-    <p class="txt"> Sujet de votre message <span class="red">*</span></p>
-
-    <div class="inputs">
-        <input class="inputContact" type="text" name="titre" required="required"><br>
-        <p>
-        <p class="txt">
-            Message <span class="red">*</span>
-        </p>
-        </p>
-        <textarea name="message" cols="40" rows="15" placeholder="Ecrire un commentaire" required="required"></textarea>
+        </form>
     </div>
-    <p class='txtAuth'><i> * Champ requis </i></p>
-    <div align="center">
-        <button type="submit">Envoyer</button>
-    </div>
-    <hr width="100%" size="5" align="center" NOSHADE>
-</form>
-</body>
-
-</html>
