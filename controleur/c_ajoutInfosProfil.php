@@ -36,6 +36,7 @@ if (isset($_POST["sommaireUtilisateur"]) && isset($_POST["entrepriseUtilisateur"
                         newInfosUtilisateur($_SESSION["idUtil"], $sommaireUtilisateur, $entrepriseUtilisateur, $posteUtilisateur);
                         $message = "Informations utilisateur actualisé avec succès.";
 
+
                     } else {
                         $msgErreur = "Le nom de votre poste ne doit pas dépasser 60 caractères.";
                     }
@@ -55,6 +56,9 @@ if (isset($_POST["sommaireUtilisateur"]) && isset($_POST["entrepriseUtilisateur"
     $msgErreur = "Erreur, tous les champs du formulaire doivent êtres complétés.";
 }
 
+if ($message !==""){
+    
+}
 include_once "$racine/vue/header.php";
 include_once "$racine/vue/v_ajoutInfosProfil.php";
 include_once "$racine/vue/footer.php";
