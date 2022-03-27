@@ -67,15 +67,19 @@ if (
 
                             // Hashage du mot de passe de l'utilisateur 
                             $mdp_hache = password_hash($mdp, PASSWORD_BCRYPT, ['cost' => 10]);
-
+                            
                             // Création du nouvel utilisateur.
                             newUtilisateur($UUID4, $nom, $prenom, $email, $mdp_hache);
 
+                            $utilisateur = getUtilisateurByMail($email);
+
+
+                            $_SESSION["idUtil"] = $utilisateur["uuidUtilisateur"];
+                            $_SESSION["dateCreationUtil"] = $utilisateur["dateCreationCompteUtilisateur"];
                             $_SESSION["nomUtil"] = $nom;
                             $_SESSION["prenomUtil"] = $prenom;
                             $_SESSION["mailU"] = $email;
-                            // ! Ajoutez une méthode pour recup la date
-                            //$_SESSION["dateCreationUtil"] = ;
+                            // ! Ajoutez une methode pour bien sortir la date
 
                             $msg = "Votre compte utilisateur vient d'être créé avec succès.";
                             $valideConnexion = true;
@@ -102,7 +106,7 @@ if (
 }
 
 if ($valideConnexion === true) {
-    include_once "$racine/controleur/c_accueil.php";
+    include "$racine/controleur/c_accueil.php";
 } else {
     // Appel du script de vue qui permet de gérer l'affichage des données
     $titre = "Création Utilisateur";
