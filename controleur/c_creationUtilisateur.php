@@ -67,18 +67,15 @@ if (
 
                             // Hashage du mot de passe de l'utilisateur 
                             $mdp_hache = password_hash($mdp, PASSWORD_BCRYPT, ['cost' => 10]);
-                            
                             // Création du nouvel utilisateur.
                             newUtilisateur($UUID4, $nom, $prenom, $email, $mdp_hache);
 
-                            $utilisateur = getUtilisateurByMail($email);
-
-
-                            $_SESSION["idUtil"] = $utilisateur["uuidUtilisateur"];
-                            $_SESSION["dateCreationUtil"] = $utilisateur["dateCreationCompteUtilisateur"];
+                            $_SESSION["idUtil"] = $UUID4;
+                            //$_SESSION["dateCreationUtil"] = $utilisateur["dateCreationCompteUtilisateur"];
                             $_SESSION["nomUtil"] = $nom;
                             $_SESSION["prenomUtil"] = $prenom;
                             $_SESSION["mailU"] = $email;
+                            $_SESSION["mdpUtil"] = $mdp_hache;
                             // ! Ajoutez une methode pour bien sortir la date
 
                             $msg = "Votre compte utilisateur vient d'être créé avec succès.";

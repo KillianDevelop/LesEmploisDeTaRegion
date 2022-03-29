@@ -36,7 +36,7 @@
                 ?>
             <div class="inputs">
                 <p class="txt">Sujet de votre message <span class="red">*</span></p>
-                <input class="input" name="titre" type="text" required="required"></input>
+                <input class="input" name="titre" type="text" placeholder="Ecrire un sujet" required="required"></input>
                 <p class="txt">Votre message <span class="red">*</span></p>
                 <textarea name="message" cols="40" rows="15" placeholder="Ecrire un commentaire" required="required"></textarea>
             </div>

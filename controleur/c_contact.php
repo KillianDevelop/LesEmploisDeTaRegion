@@ -13,6 +13,8 @@ if ($_SERVER["SCRIPT_FILENAME"] == __FILE__) {
 }
 
 include "$racine/modele/bd.utilisateur.inc.php";
+include_once "$racine/modele/authentification.inc.php";
+
 
 $msgErreur = "";
 $msg = "";
@@ -48,6 +50,10 @@ if (isset($_POST["titre"]) && isset($_POST["message"])) {
     $msgErreur = "Erreur, tous les champs du formulaire doivent être complétés.";
 }
 
-include "$racine/vue/header.php";
-include_once "$racine/vue/v_contact.php";
-include_once "$racine/vue/footer.php";
+if (estConnecte()) {
+    include_once "$racine/vue/header.php";
+    include_once "$racine/vue/v_contact.php";
+    include_once "$racine/vue/footer.php";
+}else{
+    include_once "$racine/controleur/c_authentification.php";
+}

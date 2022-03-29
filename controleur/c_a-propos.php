@@ -11,6 +11,13 @@
 if ($_SERVER["SCRIPT_FILENAME"] == __FILE__) {
     $racine = "..";
 }
-include_once "$racine/vue/header.php";
-include_once "$racine/vue/v_a-propos.php";
-include_once "$racine/vue/footer.php";
+
+include_once "$racine/modele/authentification.inc.php";
+
+if (estConnecte()) {
+    include_once "$racine/vue/header.php";
+    include_once "$racine/vue/v_a-propos.php";
+    include_once "$racine/vue/footer.php";
+}else{
+    include_once "$racine/controleur/c_authentification.php";
+}

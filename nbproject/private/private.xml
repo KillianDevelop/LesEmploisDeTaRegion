@@ -3,23 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/controleur/c_creationUtilisateur.php</file>
-            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/controleur/c_creationEntreprise.php</file>
-            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/modele/authentification.inc.php</file>
-            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/index.php</file>
-            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/controleur/c_authentificationEntreprise.php</file>
-            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/vue/v_creationEntreprise.php</file>
-            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/css/style_creation.css</file>
-            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/modele/pdo.inc.php</file>
-            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/css/style.css</file>
-            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/controleur/c_authentification.php</file>
-            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/modele/bd.utilisateur.inc.php</file>
-            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/vue/v_authentificationUtilisateur.php</file>
-            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/vue/v_creationUtilisateur.php</file>
-            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/controleur/c_principal.php</file>
-            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/getRacine.php</file>
-            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/modele/classUtilisateur.php</file>
-            <file>file:/D:/xampp/htdocs/LesEmploisDeTaRegion/vue/v_authentificationEntreprise.php</file>
+            <file>file:/D:/ProjetXampp/htdocs/LesEmploisDeTaRegion/modele/authentification.inc.php</file>
         </group>
     </open-files>
 </project-private>

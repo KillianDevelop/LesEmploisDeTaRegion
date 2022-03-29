@@ -13,6 +13,8 @@ if ($_SERVER["SCRIPT_FILENAME"] == __FILE__) {
 }
 
 include_once "$racine/modele/bd.utilisateur.inc.php";
+include_once "$racine/modele/authentification.inc.php";
+
 
 $message = "";
 $msgErreur = "";
@@ -54,10 +56,18 @@ if (isset($_POST["sommaireUtilisateur"]) && isset($_POST["entrepriseUtilisateur"
     $msgErreur = "Erreur, tous les champs du formulaire doivent êtres complétés.";
 }
 
-if ($message !== "") {
-    include_once "$racine/controleur/c_profil.php";
-} else {
+if (estConnecte()) {
     include_once "$racine/vue/header.php";
-    include_once "$racine/vue/v_ajoutInfosProfil.php";
+    include_once "$racine/vue/v_profilUtilisateur.php";
     include_once "$racine/vue/footer.php";
+
+    if ($message !== "") {
+        include_once "$racine/controleur/c_profil.php";
+    } else {
+        include_once "$racine/vue/header.php";
+        include_once "$racine/vue/v_ajoutInfosProfil.php";
+        include_once "$racine/vue/footer.php";
+    }
+} else {
+    include_once "$racine/controleur/c_authentification.php";
 }
