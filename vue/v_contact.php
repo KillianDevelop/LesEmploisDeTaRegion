@@ -4,7 +4,7 @@
 
 <div class="parent">
     <div class="box">
-        <form method="POST">
+        <form action="./?action=contact" method="POST">
             <h1> Formulaire de Contact </h1>
             <hr width="100%" size="5" align="center" NOSHADE>
             </p>

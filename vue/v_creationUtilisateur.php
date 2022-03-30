@@ -12,7 +12,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="css/style_creation.css">
     </head>
     <body>
-        <form method="POST">
+        <form action="./?action=creationUtil" method="POST">
             <h1> Création de votre compte utilisateur </h1>
             <hr width="100%" size="5" align="center" NOSHADE>    
             <p class="txtAuth"> Créez votre compte utilisateur </p>

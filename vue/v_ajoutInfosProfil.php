@@ -19,7 +19,7 @@
     </div>
 
     <div class="boxtop">
-        <form method="POST">
+        <form action="./?action=ajoutInfosProfil" method="POST">
             <h1> Ajoutez des informations à votre compte utilisateur </h1>
             <hr width="100%" size="5" align="center" NOSHADE>
             <p class="txtErreur">
