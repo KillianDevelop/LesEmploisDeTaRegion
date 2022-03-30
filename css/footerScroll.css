@@ -1,0 +1,24 @@
+
+.bg-grey {
+  background: #292929;
+}
+.logo-footer {
+  margin-bottom: 40px;
+}
+footer {
+  display: row;
+  color: grey;
+  background: #292929;
+  bottom: 0;
+  width : 100%;
+  height: 50px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+}
+footer p,
+a {
+  font-size: 13px;
+  font-family: "Roboto", sans-serif;
+  padding-top: 18px;
+  text-align: center;
+}
