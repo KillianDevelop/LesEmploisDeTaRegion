@@ -5,7 +5,7 @@
 <div class="parent">
     <div class="profil">
         <div class="iconeprofil">
-            <i class="fa-solid fa-circle-user" ></i>
+            <i class="fa-solid fa-circle-user"></i>
         </div>
         <p class="nom"><?php echo $_SESSION["prenomUtil"] . " " . $_SESSION["nomUtil"]; ?></p>
         <hr class="hrprofil">
@@ -16,34 +16,58 @@
                                     icône utilisateur dans l'onglet <b>Mon Profil</b>.";
                                 } ?></p>
     </div>
-    <div class="post">
-        <form input="POST">
-            <div class="englobePost">
+    <div class="block">
+        <div class="post">
+            <form action="./?action=accueil" method="POST">
+                <div class="englobePost">
 
-                <div class="iconePost">
-                    <i class="fa-solid fa-circle-user"></i>
+                    <div class="iconePost">
+                        <i class="fa-solid fa-circle-user"></i>
+                    </div>
+                    <textarea name="publication" cols="40" rows="3" placeholder="Commencer un post" required="required"></textarea>
                 </div>
-                <textarea name="publication" cols="40" rows="3" placeholder="Commencer un post" required="required"></textarea>
-            </div>
 
-            <button type="submit">Envoyer</button>
+                <button type="submit">Envoyer</button>
 
-        </form>
-    </div>
-    <div class="corps">
-        <div class="englobeInfos">
-            <div class="iconePost">
-                <i class="fa-solid fa-circle-user"></i>
-            </div>
-            <div class="infos">
-                <p class="nomCorps">Jean Pierre</p>
-                <p class="emploi"> Etudiant </p>
-                <p class="datePublication">17h</p>
-            </div>
+            </form>
         </div>
-        <hr class="hrpublication">
+        <?php
+        $publication = array();
+        $utilisateur = array();
+        $i = 0;
 
-        <p class="corpsMessage">Je suis actuellement à la recherche d'un stage de trois mois pour valider ma formation </p>
+        $publication = getPublication();
+        //var_dump($publication);
 
+        while ($i < count($publication)) {
+
+            //$utilisateur = getUtilisateur();
+
+            $utilisateur = getInfosUtilisateurByUuid($publication[$i]["uuidUtilisateur"]);
+            //var_dump($utilisateur);
+        ?>
+            <div class="corps">
+                <div class="englobeInfos">
+                    <div class="iconePost">
+                        <i class="fa-solid fa-circle-user"></i>
+                    </div>
+                    <div class="infos">
+                        <p class="nomCorps"><?php echo $utilisateur["prenomUtilisateur"] . " " . $utilisateur["nomUtilisateur"]; ?></p>
+                        <p class="emploi"><?php if (isset($utilisateur["posteUtilisateur"])) {
+                                                echo $utilisateur["posteUtilisateur"];
+                                            } else {
+                                                echo "Aucune informations.";
+                                            } ?></p>
+                        <p class="datePublication"><?php echo $publication[$i]["dateCreationPublication"]; ?></p>
+                    </div>
+                </div>
+                <hr class="hrpublication">
+
+                <p class="corpsMessage"> <?php echo $publication[$i]["messagePublication"]; ?></p>
+
+            </div>
+        <?php
+            $i++;
+        } ?>
     </div>
 </div>
