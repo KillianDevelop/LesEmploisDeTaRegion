@@ -51,6 +51,48 @@ function getUtilisateurByMail(string $melU)
     return $resultat;
 }
 
+
+function getUtilisateur()
+{
+
+    // Déclaration d'une variable tableau vide de résultat
+    $resultat = array();
+
+    try {
+
+        // Déclaration d'un variable contenant les informations de connexion
+        // à la base de données via PDO
+        $connexion = connexionPDO();
+
+        /* 
+        * Déclaration de la requête SQL à exécuter
+        * La requête retournera l'id , le nom, le prénom, mail,
+        * et la date de création du compte de l'utilisateur authentifié
+        */
+
+        $sql = "select u.uuidUtilisateur, u.nomUtilisateur, u.prenomUtilisateur,"
+            . " u.emailUtilisateur, u.motDePasseUtilisateur, u.dateCreationCompteUtilisateur,"
+            . " u.sommaireUtilisateur, u.entrepriseUtilisateur, u.posteUtilisateur"
+            . " from utilisateur u";
+
+        // Préparation de la requête SQL
+        $requete = $connexion->prepare($sql);
+        $requete->execute();
+        // Affectation d'un tableau associatif contenant les informations de l'utilisateur
+        // ("nom_du_champ" => "valeur_du_champ")
+        $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+
+        // Affichage d'un message contextuel d'erreur
+        print "Erreur !: " . $e->getMessage();
+
+        // Arrêt du code
+        die();
+    }
+
+    return $resultat;
+}
+
 function getIdEtMdpParNomEtPrenom(string $nomU, string $prenomU)
 {
 
@@ -94,9 +136,13 @@ function getIdEtMdpParNomEtPrenom(string $nomU, string $prenomU)
     return $resultat;
 }
 
-function newUtilisateur(string $uuidUtilisateur, string $nomUtilisateur, string $prenomUtilisateur, string $emailUtilisateur, 
-                        string $motDePasseUtilisateur)
-{
+function newUtilisateur(
+    string $uuidUtilisateur,
+    string $nomUtilisateur,
+    string $prenomUtilisateur,
+    string $emailUtilisateur,
+    string $motDePasseUtilisateur
+) {
     $resultat = array();
     try {
         $connexion = connexionPDO();
@@ -118,23 +164,23 @@ function newUtilisateur(string $uuidUtilisateur, string $nomUtilisateur, string 
     return $resultat;
 }
 
-function verif_existe(string $emailUtilisateur){
+function verif_existe(string $emailUtilisateur)
+{
     $valide = false;
-    try{
+    try {
         $connexion = connexionPDO();
         $sql = "SELECT count(U.uuidUtilisateur) as 'existe'"
-                . " FROM utilisateur U"
-                . " WHERE U.emailUtilisateur = :emailUtilisateur";
+            . " FROM utilisateur U"
+            . " WHERE U.emailUtilisateur = :emailUtilisateur";
         $requete = $connexion->prepare($sql);
         $requete->execute(array(':emailUtilisateur' => $emailUtilisateur));
 
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
 
-        if ($resultat["existe"] !==0){
+        if ($resultat["existe"] !== 0) {
             $valide = true;
         }
-
-    }catch(PDOException $e){
+    } catch (PDOException $e) {
         print 'Erreur, ' . $e->getMessage();
         die();
     }
@@ -163,7 +209,8 @@ function newFormulaireContact(string $sujetContact, string $messageContact, stri
     return $resultat;
 }
 
-function genererUUIDV4($data = null){
+function genererUUIDV4($data = null)
+{
     $data = $data ?? random_bytes(16);
     assert(strlen($data) == 16);
 
@@ -213,9 +260,11 @@ function getInfosUtilisateurByUuid(string $uuidUtilisateur)
         * et la date de création du compte de l'utilisateur authentifié
         */
 
-        $sql = "select u.sommaireUtilisateur, u.entrepriseUtilisateur, u.posteUtilisateur"
+        $sql = "select u.uuidUtilisateur, u.nomUtilisateur, u.prenomUtilisateur,"
+            . " u.emailUtilisateur, u.motDePasseUtilisateur, u.dateCreationCompteUtilisateur,"
+            . " u.sommaireUtilisateur, u.entrepriseUtilisateur, u.posteUtilisateur"
             . " from utilisateur u"
-            . " where u.uuidUtilisateur = :uuidUtilisateur";
+            . " where u.uuidUtilisateur = :uuidUtilisateur;";
 
         // Préparation de la requête SQL
         // Préparation de la requête SQL
@@ -225,6 +274,67 @@ function getInfosUtilisateurByUuid(string $uuidUtilisateur)
         // Affectation d'un tableau associatif contenant les informations de l'utilisateur
         // ("nom_du_champ" => "valeur_du_champ")
         $resultat = $requete->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+
+        // Affichage d'un message contextuel d'erreur
+        print "Erreur !: " . $e->getMessage();
+
+        // Arrêt du code
+        die();
+    }
+
+    return $resultat;
+}
+
+function newPublication(string $messagePublication, string $uuidUtilisateur)
+{
+    $resultat = array();
+    try {
+        $connexion = connexionPDO();
+
+        $sql = "insert into publication (messagePublication, uuidUtilisateur)
+                VALUES (:messagePublication, :uuidUtilisateur)";
+        $requete = $connexion->prepare($sql);
+        $requete->execute(array(
+            ':messagePublication' => $messagePublication,
+            ':uuidUtilisateur' => $uuidUtilisateur
+        ));
+    } catch (PDOException $e) {
+        print 'Erreur' . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+
+function getPublication()
+{
+
+    // Déclaration d'une variable tableau vide de résultat
+    $resultat = array();
+
+    try {
+
+        // Déclaration d'un variable contenant les informations de connexion
+        // à la base de données via PDO
+        $connexion = connexionPDO();
+
+        /* 
+        * Déclaration de la requête SQL à exécuter
+        * La requête retournera l'id , le nom, le prénom, mail,
+        * et la date de création du compte de l'utilisateur authentifié
+        */
+
+        $sql = "select p.uuidUtilisateur, p.messagePublication, p.dateCreationPublication"
+            . " from publication p"
+            . " order by p.dateCreationPublication DESC";
+
+        // Préparation de la requête SQL
+        $requete = $connexion->prepare($sql);
+        $requete->execute();
+        // Affectation d'un tableau associatif contenant les informations de l'utilisateur
+        // ("nom_du_champ" => "valeur_du_champ")
+        $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
 
         // Affichage d'un message contextuel d'erreur
