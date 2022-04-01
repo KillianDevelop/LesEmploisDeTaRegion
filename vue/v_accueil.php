@@ -25,6 +25,8 @@
                         <i class="fa-solid fa-circle-user"></i>
                     </div>
                     <textarea name="publication" cols="40" rows="3" placeholder="Commencer un post" required="required"></textarea>
+                    <input type="hidden" name="jeton" value="<?= $_SESSION["jeton"]; ?>"><br>
+
                 </div>
 
                 <button type="submit">Envoyer</button>
@@ -64,7 +66,15 @@
                 <hr class="hrpublication">
 
                 <p class="corpsMessage"> <?php echo $publication[$i]["messagePublication"]; ?></p>
-
+                <hr class="hrbas">
+                <div class="interactions">
+                    <a href="./?action=1&id<?= $publication[$i]["uuidUtilisateur"] ?>"><i class="fa-solid fa-thumbs-up"></i>
+                        <p class="txtinteractions">J'aime</p>
+                    </a>(15)
+                    <a href="./?action=2&id<?= $publication[$i]["uuidUtilisateur"] ?>"><i class="fa-solid fa-thumbs-down"></i>
+                        <p class="txtinteractions">Je n'aime pas</p>
+                    </a>(2)
+                </div>
             </div>
         <?php
             $i++;

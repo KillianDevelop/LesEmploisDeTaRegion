@@ -63,9 +63,11 @@
                 <div class="div-sec">
                     <input class="input" name="posteUtilisateur" type="text" placeholder="Votre Poste" required="required"></input>
                 </div>
-                <p class="txt">Si vous n'avez actuellement aucun emploi, ajoutez <b>"En recherche d'emploi"</b> dans les deux champs.                 </p>
+                <p class="txt">Si vous n'avez actuellement aucun emploi, ajoutez <b>"En recherche d'emploi"</b> dans les deux champs. </p>
 
             </div>
+            <input type="hidden" name="jeton" value="<?= $_SESSION["jeton"]; ?>"><br>
+
             <button type="submit">Envoyer</button>
     </div>
 

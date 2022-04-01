@@ -48,6 +48,10 @@ function login(string $melU, string $mdpU)
             $_SESSION["mdpUtil"] = $mdp;
             $_SESSION["mailU"] = $utilisateur["emailUtilisateur"];
             $_SESSION["dateCreationUtil"] = $utilisateur["dateCreationCompteUtilisateur"];
+
+            // Création d'un token pour identifier l'utilisateur connecté
+            $_SESSION['jeton'] = bin2hex(openssl_random_pseudo_bytes(6));
+
             // Évolution du besoin d'un message erreur
             $valide = FALSE;
         }

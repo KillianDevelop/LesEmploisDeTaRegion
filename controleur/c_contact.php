@@ -17,31 +17,29 @@ include_once "$racine/modele/authentification.inc.php";
 
 if (estConnecte()) {
 
-    $msgErreur = "";
-    $msg = "";
+$msgErreur = "";
+$msg = "";
 
-    if (isset($_POST["titre"]) && isset($_POST["message"])) {
+if (isset($_POST["titre"]) && isset($_POST["message"])) {
 
-        if (!empty($_POST["titre"]) && !empty($_POST["message"])) {
+    if (!empty($_POST["titre"]) && !empty($_POST["message"])) {
 
-            if (filter_has_var(INPUT_POST, 'titre') && filter_has_var(INPUT_POST, 'message')) {
+        if (filter_has_var(INPUT_POST, 'titre') && filter_has_var(INPUT_POST, 'message')) {
 
-                if (strlen($_POST["titre"]) <= 100) {
+            if (strlen($_POST["titre"]) <= 100) {
 
-                    if (strlen($_POST["message"]) <= 500) {
+                if (strlen($_POST["message"]) <= 500) {
 
-                        $titre = htmlspecialchars($_POST['titre'], ENT_NOQUOTES);
-                        $message = htmlspecialchars($_POST['message'], ENT_NOQUOTES);
-                        newFormulaireContact($titre, $message, $_SESSION["idUtil"]);
-                        $msg = "Votre formulaire de contact vient d'être créé avec succès.";
-                    } else {
-                        $msgErreur = "Vous avez dépassé le nombre maximal de caractères (500) dans votre message.";
-                    }
+                    $titre = htmlspecialchars($_POST['titre'], ENT_NOQUOTES);
+                    $message = htmlspecialchars($_POST['message'], ENT_NOQUOTES);
+                    newFormulaireContact($titre, $message, $_SESSION["idUtil"]);
+                    $msg = "Votre formulaire de contact vient d'être créé avec succès.";
+
                 } else {
-                    $msgErreur = "Vous avez dépassé le nombre maximal de caractères (100) dans votre titre.";
+                    $msgErreur = "Vous avez dépassé le nombre maximal de caractères (500) dans votre message.";
                 }
             } else {
-                $msgErreur = "Erreur, tous les champs du formulaire doivent être complétés.";
+                $msgErreur = "Vous avez dépassé le nombre maximal de caractères (100) dans votre titre.";
             }
         } else {
             $msgErreur = "Erreur, tous les champs du formulaire doivent être complétés.";
@@ -49,10 +47,13 @@ if (estConnecte()) {
     } else {
         $msgErreur = "Erreur, tous les champs du formulaire doivent être complétés.";
     }
+} else {
+    $msgErreur = "Erreur, tous les champs du formulaire doivent être complétés.";
+}
 
     include_once "$racine/vue/header.php";
     include_once "$racine/vue/v_contact.php";
     include_once "$racine/vue/footer.php";
-} else {
+}else{
     include_once "$racine/controleur/c_authentification.php";
 }

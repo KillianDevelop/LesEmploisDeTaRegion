@@ -39,6 +39,7 @@
                 <input class="input" name="titre" type="text" placeholder="Ecrire un sujet" required="required"></input>
                 <p class="txt">Votre message <span class="red">*</span></p>
                 <textarea name="message" cols="40" rows="15" placeholder="Ecrire un commentaire" required="required"></textarea>
+                <input type="hidden" name="jeton" value="<?= $_SESSION["jeton"]; ?>"><br>
             </div>
             <p class='txtAuth'><i><span class="red">*</span> Champ requis </i></p>
             <div class="div-principal">

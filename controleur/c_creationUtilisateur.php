@@ -76,6 +76,10 @@ if (
                             $_SESSION["prenomUtil"] = $prenom;
                             $_SESSION["mailU"] = $email;
                             $_SESSION["mdpUtil"] = $mdp_hache;
+
+                            // Ajout d'un token pour identifier l'utilisateur connecté
+                            $_SESSION['jeton'] = bin2hex(openssl_random_pseudo_bytes(6));
+
                             // ! Ajoutez une methode pour bien sortir la date
 
                             $msg = "Votre compte utilisateur vient d'être créé avec succès.";
